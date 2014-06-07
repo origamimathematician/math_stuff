@@ -1,0 +1,277 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Rewrites 2}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.5 (Original)} 
+
+\textbf{Proposition.} Cauchy sequences of complex numbers converge if and only if, whenever a series $\sum |a_n|$ converges, then $\sum a_n$ converges as well.
+
+\begin{proof} First we assume the convergence of Cauchy sequences. We will show that this implies that absolutely convergent series conditionally converge as well. Let ${a_n}$ be a sequence of complex numbers such that $\sum_{n=1}^\infty |a_n|$ converges. This implies that the sequence of partial sums of $\sum_{n=1}^\infty |a_n|$ (we denote the $N^th$ partial sum as $|A|_N$) converges and therefore must be a Cauchy sequence. In particular, this implies that given $\epsilon > 0$, there exists some $N$ such that for $K,M \geq N$ (without lose of generality we can assume that $K > M$) 
+
+	$$||A|_K - |A|_M| < \epsilon\,.$$
+	
+	Observe that 
+	$$\epsilon > ||A|_K - |A|_M| = |A|_K - |A|_M = \sum_{M+1}^K |a_n| \geq |\sum_{M+1}^K a_n| = |A_K +A_M|\,,$$
+	
+	where $A_M$ is the $M^{th}$ partial sum of $\sum_{n=1}^\infty a_n$. Thus, we see that ${A_N}$ is a Cauchy sequence as well and therefore it converges. 
+
+Next assume that if a series converges absolutely then, it converges conditionally. We will show that this implies the convergence of Cauchy sequences. Let ${a_n}$ be a Cauchy sequence of complex numbers. Since ${a_n}$ is Cauchy there exists some $N_1$ such that for $n > N_1$
+
+$$|a_n - a_{N_1}| < \frac{1}{2}\,.$$
+
+Similarly, there exists some $N_2$ such that for $n > N_2$
+
+$$|a_n - a_{N_2}| < \frac{1}{2^2}\,.$$
+
+Proceeding inductively we see that in general We can find a $N_k$ such that for $n > N_k$
+
+$$|a_n - a_{N_k}| < \frac{1}{2^k}\,.$$
+
+Note that we have created an increasing sequence of indices $N_1 < N_2 < ... < N_k$. Thus we can replace some terms in the above inequalities as follows
+
+	$$|a_n - a_{N_k}| < \frac{1}{2^k}$$
+	$$|a_{N_k} - a_{N_{k-1}}| < \frac{1}{2^{k-1}}$$
+	$$\m$$
+	$$\m$$
+	$$\m$$
+	$$|a_{N_2} - a_{N_{1}}| < \frac{1}{2}\,,$$
+	
+	where $n > N_k$. Setting $n = N_{K+1}$ and  combining these inequalities into sums we obtain
+	
+	$$\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}| < \sum_{k=1}^K \frac{1}{2^k}\,.$$
+	
+	Observe that the right-hand side of this inequality is a geometric series that converges as $K \rightarrow \infty$. Therefore the left-hand side must also be a convergent series. By our hypothesis, since $\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}|$ is convergent, it follows that $\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}}$ is convergent as well.  Observe that this series is telescopic and therefore
+	
+	$$\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}} = a_{N_{k+1}} = a_n$$
+	
+	for $n > N_{k}$. Hence, the Cauchy sequence ${a_n}$ is convergent.
+
+\end{proof}
+
+\item \textbf{Rewrite of Exercise 1.5} 
+
+\textbf{Proposition.} Cauchy sequences of complex numbers converge if and only if, whenever a series $\sum |a_n|$ converges, then $\sum a_n$ converges as well.
+
+\begin{proof} First we assume the convergence of Cauchy sequences. We will show that this implies that absolutely convergent series conditionally converge as well. Let $\lbrace a_n \rbrace$ be a sequence of complex numbers such that $\sum_{n=1}^\infty |a_n|$ converges. This implies that the sequence of partial sums of $\sum_{n=1}^\infty |a_n|$ (we denote the $N^th$ partial sum as $|A|_N$) converges and therefore must be a Cauchy sequence. In particular, this implies that given $\epsilon > 0$, there exists some $N$ such that for $K,M \geq N$ (without lose of generality we can assume that $K > M$) 
+
+	$$||A|_K - |A|_M| < \epsilon\,.$$
+	
+	Observe that 
+	$$\epsilon > ||A|_K - |A|_M| = |A|_K - |A|_M = \sum_{M+1}^K |a_n| \geq |\sum_{M+1}^K a_n| = |A_K +A_M|\,,$$
+	
+	where $A_M$ is the $M^{th}$ partial sum of $\sum_{n=1}^\infty a_n$. Thus, we see that ${A_N}$ is a Cauchy sequence as well and therefore it converges. 
+
+Next assume that if a series converges absolutely then, it converges conditionally. We will show that this implies the convergence of Cauchy sequences. Let $\lbrace a_n \rbrace$ be a Cauchy sequence of complex numbers. Since $\lbrace a_n \rbrace$ is Cauchy there exists some $N_1$ such that for $n > N_1$
+
+$$|a_n - a_{N_1}| < \frac{1}{2}\,.$$
+
+Similarly, there exists some $N_2 > N_1$ such that for $n > N_2$
+
+$$|a_n - a_{N_2}| < \frac{1}{2^2}\,.$$
+
+Proceeding inductively we see that in general We can find a $N_k > N_{k-1}$ such that for $n > N_k$
+
+$$|a_n - a_{N_k}| < \frac{1}{2^k}\,.$$
+
+Note that we have created an increasing sequence of indices $N_1 < N_2 < ... < N_k$. Thus we can replace some terms in the above inequalities as follows
+
+	$$|a_{N_{k+1}} - a_{N_k}| < \frac{1}{2^k}$$
+	$$|a_{N_k} - a_{N_{k-1}}| < \frac{1}{2^{k-1}}$$
+	$$\m$$
+	$$\m$$
+	$$\m$$
+	$$|a_{N_2} - a_{N_{1}}| < \frac{1}{2}\,,$$
+	
+	Combining these inequalities into sums we obtain
+	
+	$$\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}| < \sum_{k=1}^K \frac{1}{2^k}\,.$$
+	
+	Observe that the right-hand side of this inequality is a geometric series that converges as $K \rightarrow \infty$. Therefore the left-hand side must also be a convergent series. By our hypothesis, since $\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}|$ is convergent, it follows that $\sum_{k=1}^K\left( a_{N_{k+1}} - a_{N_{k}}\right)$ is convergent as well.  Observe that this series is telescopic and therefore
+	
+	$$\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}} = a_{N_{K+1}} - a_{N_1}\,.$$
+	
+	Thus, we have shown that $\langle a_n \rangle$ contains a convergent subsequence. This means that the Cauchy sequence ${a_n}$ must be convergent as well.
+
+\end{proof}
+
+
+\item \textbf{Exercise 2.11 (Original)}
+
+\item \textbf{Proposition.} Given a projection $P$ on a Hilbert space $\mathcal{H}$, the following holds:
+
+\begin{enumerate}
+
+\item $I-P$ is also a projection
+\item $\mathcal{R}(P) = \mathcal{N}(I-P)$
+\item $\mathcal{H} = \mathcal{R}(P) + \mathcal{N}(P)$
+
+\end{enumerate}
+
+\begin{proof} Let $z \in \mathcal{H}$, then observe that
+
+$$[I(z) - P(z)]^2 = I(I(z)) -2I(P(z)) + P(P(z)) = I(z) - 2P(z) + P(z) = I(z) - P(z)\,.$$
+
+Thus the first result holds. 
+
+Next we will show that $\mathcal{R}(P) \subseteq \mathcal{N}(I-P)$ and $\mathcal{R}(P) \supseteq \mathcal{N}(I-P)$. First observe that given $z \in \mathcal{R}(P)$, there must exist some $w \in \mathcal{H}$ such that $P(w) = z$. However since $P$ is a projection on $\mathcal{H}$, it must also hold that $P(P(w)) = P(z) = z$. Thus $z$ is also the image under $P$ of itself. It follows that $(I-P)(z) = z-z = 0$ and therefore $z \in \mathcal{N}(I-P)$. Now given $z \in \mathcal{N}(I-P)$ we observe that $I(z) - P(z) = z - P(z) = 0$, which implies $P(z) = z$. Hence $z \in \mathcal{R}(P)$. Consequently, we see that result two holds as well.
+
+For the final result, it is clear that $\mathcal{R}(P)+\mathcal{N}(P) \subseteq \mathcal{H}$. Therefore we will show that $\mathcal{H} \subseteq \mathcal{R}(P)+\mathcal{N}(P)$. 
+
+\textit{I could not figure out how to make this work. Am I not understanding what is being asked? Is it not the union of the two sets?}
+
+\end{proof}
+
+
+\item \textbf{Rewrite of Exercise 2.11}
+
+\item \textbf{Proposition.} Given a projection $P$ on a Hilbert space $\mathcal{H}$, the following holds:
+
+\begin{enumerate}
+
+\item $I-P$ is also a projection
+\item $\mathcal{R}(P) = \mathcal{N}(I-P)$
+\item $\mathcal{H} = \mathcal{R}(P) + \mathcal{N}(P)$
+
+\end{enumerate}
+
+\begin{proof} Let $z \in \mathcal{H}$, then observe that
+
+$$[I(z) - P(z)]^2 = I(I(z)) -2I(P(z)) + P(P(z)) = I(z) - 2P(z) + P(z) = I(z) - P(z)\,.$$
+
+Thus the first result holds. 
+
+Next we will show that $\mathcal{R}(P) \subseteq \mathcal{N}(I-P)$ and $\mathcal{R}(P) \supseteq \mathcal{N}(I-P)$. First observe that given $z \in \mathcal{R}(P)$, there must exist some $w \in \mathcal{H}$ such that $P(w) = z$. However since $P$ is a projection on $\mathcal{H}$, it must also hold that $P(P(w)) = P(z) = z$. Thus $z$ is also the image under $P$ of itself. It follows that $(I-P)(z) = z-z = 0$ and therefore $z \in \mathcal{N}(I-P)$. Now given $z \in \mathcal{N}(I-P)$ we observe that $I(z) - P(z) = z - P(z) = 0$, which implies $P(z) = z$. Hence $z \in \mathcal{R}(P)$. Consequently, we see that result two holds as well.
+
+For the final result, it is clear that $\mathcal{R}(P)+\mathcal{N}(P) \subseteq \mathcal{H}$. Therefore we will show that $\mathcal{H} \subseteq \mathcal{R}(P)+\mathcal{N}(P)$. Given $z \in \mathcal{H}$ observe that
+
+$$z = P(z) + z - P(z) = P(z) + I(z) - P(z) = P(z) + (I-P)(z)\,.$$
+
+Note that $P(z) \in \mathcal{R}(P)$ and $(I-P)(z) \in \mathcal{R}(I-P)$. From the previous results we know that
+
+$$\mathcal{R}(I-P) = \mathcal{N}(P)\,.$$
+
+Hence, we see that for all $z \in \mathcal{H}$, 
+
+$$z \in \mathcal{R}(P) + \mathcal{N}(P)\,.$$
+
+It follows that $\mathcal{H} = \mathcal{R}(P) + \mathcal{N}(P)$.
+
+\end{proof}
+
+\item \textbf{Exercise 5 from D'Angelo HW2 (Original)}
+
+\item{\bf{Proposition:}} 
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = 0 \text{ for } N \in \mathbb{N}\,.$$
+
+\begin{proof} In order to solve this problem, we will make the following substitution
+
+$$cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2}\,.$$
+
+Thus, the integral can be rewritten as
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = \int_0^{2\pi} \Big(\frac{e^{i\theta} + e^{-i\theta}}{2}\Big)^{2N}d\theta = $$
+
+$$2^{-2N} \int_0^{2\pi} (e^{i\theta} + e^{-i\theta})^{2N}d\theta\,.$$
+
+Using the binomial theorem we can rewrite this as
+
+$$2^{-2N} \int_0^{2\pi} \sum_{k=0}^{2N} {2N \choose k} (e^{i\theta})^{2N-k}(e^{-i\theta})^k d\theta = 2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \int_0^{2\pi}  e^{i\theta(2N-2k)} d\theta = $$
+$$2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \Big[\frac{e^{i2\theta(N-k)}}{i2(N-K)}\Big]_0^{2\pi} = 2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \frac{1-1}{i2(N-K)} = 0\,.$$
+
+\end{proof}
+
+\item \textbf{Rewrite of Exercise 5 from D'Angelo HW2}
+
+\item{\bf{Proposition:}} 
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = 0 \text{ for } N \in \mathbb{N}\,.$$
+
+\begin{proof} In order to solve this problem, we will make the following substitution
+
+$$cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2}\,.$$
+
+Thus, the integral can be rewritten as
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = \int_0^{2\pi} \Big(\frac{e^{i\theta} + e^{-i\theta}}{2}\Big)^{2N}d\theta = $$
+
+$$2^{-2N} \int_0^{2\pi} (e^{i\theta} + e^{-i\theta})^{2N}d\theta\,.$$
+
+Using the binomial theorem we can rewrite this as
+
+$$2^{-2N} \int_0^{2\pi} \sum_{k=0}^{2N} {2N \choose k} (e^{i\theta})^{2N-k}(e^{-i\theta})^k d\theta = 2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \int_0^{2\pi}  e^{i\theta(2N-2k)} d\theta = $$
+$$2^{-2N} \sum_{k=0,k\neq N}^{2N}{2N \choose k} \Big[\frac{e^{i2\theta(N-k)}}{i2(N-K)}\Big]_0^{2\pi} + {2N \choose N} \int_0^{2\pi}  e^{i\theta0} d\theta = $$
+$$2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \frac{1-1}{i2(N-K)} + {2N \choose N} \int_0^{2\pi} d\theta = 2\pi{2N \choose N}\,.$$
+
+\end{proof}
+
+\end{description}
+
+\end{document} 

@@ -1,0 +1,171 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\intg} [4] {\int_{#1}^{#2} #3 d#4}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 5}
+\end{center}
+
+
+\begin{description}
+
+\item{\bf{Exercise 1.38}}\\
+
+\item We will calculate the Fourier series for the function 
+
+$$\cos^{2N}(x)\,.$$
+
+Using the exponential notation for $\cos(x)$ we obtain
+
+$$\cos^{2N}(x) = \frac{(e^{ix}+e^{-ix})^{2N}}{2^{2N}}\,.$$
+
+Then, by the binomial theorem, we can expand the numerator as follows
+
+$$\frac{(e^{ix}+e^{-ix})^{2N}}{2^{2N}} = \frac{\sum_{k=0}^{2N}{2N \choose k}e^{ix(2N-k)}e^{-ixk}}{2^{2N}} = \frac{1}{2^{2N}}\sum_{k=0}^{2N}{2N \choose k}e^{ix(2N-2k)}\,.$$
+
+We note that this final expression is a Fourier series. Thus, we are done.
+
+\item{\bf{Exercise 1.41}}\\
+
+\item We will calculate the Fourier series for the function 
+
+\begin{displaymath}
+   f(x) = \left\{
+     \begin{array}{ll}
+       -1 & : -\pi < x < 0\\
+       1 & : 0 < x < \pi\\
+     \end{array}
+   \right.
+\end{displaymath} 
+
+First, we calculate the Fourier coefficients. Note that since $f(x)$ is an odd function
+
+$$\hat{f}(0) = \frac{1}{2\pi}\intg{-\pi}{\pi}{f(x)}{x} = 0\,.$$
+
+Now consider the case for which $n \neq 0$. We have
+
+$$\hat{f}(n) = \frac{1}{2\pi}\intg{-\pi}{\pi}{f(x)e^{-inx}}{x} = \frac{1}{2\pi}\Big[\intg{-\pi}{\pi}{f(x)\cos(nx)}{x} + \intg{-\pi}{\pi}{f(x)\sin(nx)}{x}\Big]\,.$$
+
+Then since $f(x)$ is odd and $\cos(x)$ is even, the left integral must be equal to zero. Thus, we have
+
+$$\frac{1}{2\pi}\Big[\intg{-\pi}{\pi}{f(x)\cos(nx)}{x} + \intg{-\pi}{\pi}{f(x)\sin(nx)}{x}\Big] = \frac{1}{2\pi}\intg{-\pi}{\pi}{f(x)\sin(nx)}{x} = $$
+
+$$\frac{1}{\pi}\intg{0}{\pi}{f(x)\sin(nx)}{x} = \frac{i}{\pi}\frac{-\cos(nx)}{n}\Big|_0^\pi = \frac{i(-1)^{n+1} + i}{n\pi}\,.$$
+
+Observe that this final expression is equal to zero for $n = 2k$ and is equal to $2i/n\pi$ for $n = 2k+1$. Thus, the Fourier series for $f(x)$ is
+
+$$\sum_{k<0} \frac{2i}{(2k+1)\pi}e^{i(2k+1)x} + \sum_{k>0} \frac{2i}{(2k+1)\pi}e^{i(2k+1)x} = \sum_{k>0} \frac{2i}{-(2k+1)\pi}e^{-i(2k+1)x} + \sum_{k>0} \frac{2i}{(2k+1)\pi}e^{i(2k+1)x} = $$
+
+$$\sum_{k>0}\frac{2i}{(2k+1)\pi}e^{i(2k+1)x} - \frac{2i}{(2k+1)\pi}e^{-i(2k+1)x} = \sum_{k>0}\frac{2i}{(2k+1)\pi}(e^{i(2k+1)x} - e^{-i(2k+1)x}) = $$
+
+$$\sum_{k>0}\frac{2i}{(2k+1)\pi}2i\sin[(2k+1)x] = \sum_{k>0}\frac{-4}{2k\pi+\pi}\sin(2kx+x)\,.$$
+
+\item{\bf{Exercise 1.42}}\\
+
+\item We will calculate the Fourier series for the function 
+
+$$f(x) = e^ax\,.$$
+
+The Fourier coefficients are
+
+$$\hat{f}(0) = \frac{1}{2\pi}\intg{0}{2\pi}{e^{ax}}{x} = \frac{e^{2a\pi} - 1}{2a\pi}\,,$$
+
+and 
+
+$$\hat{f}(n) = \frac{1}{2\pi}\intg{0}{2\pi}{e^{ax}e^{-inx}}{x} = \frac{1}{2\pi}\frac{e^{(a-in)x}}{a-in}\Big|_0^{2\pi} = \frac{1}{2\pi}\frac{e^{(a-in)2\pi}-1}{a-in} = \frac{1}{2\pi}\frac{e^{2a\pi}-1}{a-in}\,.$$
+
+Now we can calculate the Fourier series for $f(x)$. Observe that
+
+$$\sum_{n \in \mathbb{Z}}\hat{f}(n)e^{inx} = \frac{e^{2a\pi}-1}{2\pi}\Bigg[\frac{1}{a} + \sum_{n<0}\frac{e^{inx}}{a-in} + \sum_{n>0}\frac{e^{inx}}{a-in}\Bigg] = $$
+
+$$\frac{e^{2a\pi}-1}{2\pi}\Bigg[\frac{1}{a} + \sum_{n>0}\frac{e^{-inx}}{a+in} + \sum_{n>0}\frac{e^{inx}}{a-in}\Bigg] = \frac{e^{2a\pi}-1}{2\pi}\Bigg[\frac{1}{a} + \sum_{n>0}\frac{(a-in)e^{-inx}+(a+in)e^{inx}}{a^2+n^2}\Bigg] = $$
+
+$$\frac{e^{2a\pi}-1}{2\pi}\Bigg[\frac{1}{a} + \sum_{n>0}\frac{2a\cos(nx)+2ini\sin(nx)}{a^2+n^2}\Bigg] = \frac{e^{2a\pi}-1}{\pi}\Bigg[\frac{1}{2a} + \sum_{n>0}\frac{a\cos(nx)-n\sin(nx)}{a^2+n^2}\Bigg]\,.$$
+
+\item{\bf{Exercise 1.43}}\\
+
+\item We will calculate the Fourier series for the function 
+
+$$f(x) = \sinh(x) = \frac{e^x-e^{-x}}{2}\,.$$
+
+The Fourier coefficients are as follows 
+
+$$\hat{f}(0) = \frac{1}{2\pi}\intg{-\pi}{\pi}{\sinh(x)}{x} = 0$$
+
+and
+
+$$\hat{f}(n) = \frac{1}{2\pi}\intg{-\pi}{\pi}{\frac{e^x-e^{-x}}{2}e^{-inx}}{x} = \frac{1}{2\pi}\intg{-\pi}{\pi}{\frac{e^{(1-in)x}-e^{(-1-in)x}}{2}}{x} = $$
+
+$$\frac{1}{4\pi}\Big[\frac{e^{(1-in)x}}{1-in} + \frac{e^{(-1-in)x}}{1+in}\Big]_{-\pi}^{\pi} = \frac{(-1)^n}{4\pi}\Big[\frac{e^{\pi} - e^{-\pi}}{1-in} + \frac{e^{-\pi}-e^{\pi}}{1+in}\Big] = $$
+
+$$\frac{(-1)^n}{2\pi}\Big[\frac{\sinh(\pi)}{1-in} - \frac{\sinh(\pi)}{1+in}\Big] = \frac{(-1)^n}{2\pi}\Big[\frac{(1+in)\sinh(\pi) - (1-in)\sinh(\pi)}{1+n^2}\Big] = $$
+
+$$\frac{(-1)^n}{\pi}\Big[\frac{in\sinh(\pi)}{1+n^2}\Big]\,.$$
+
+Now we can proceed to calculating the Fourier series. Observe that
+
+$$\sum_{n \in \mathbb{Z}}\hat{f}(n)e^{inx} = \frac{\sinh(\pi)}{\pi}\Big[\sum_{n<0}\frac{(-1)^nin}{1+n^2}e^{inx} + \sum_{n>0}\frac{(-1)^nin}{1+n^2}e^{inx}\Big] = $$
+
+$$\frac{\sinh(\pi)}{\pi}\Big[\sum_{n>0}\frac{(-1)^{n+1}in}{1+n^2}e^{-inx} + \sum_{n>0}\frac{(-1)^nin}{1+n^2}e^{inx}\Big] = \frac{\sinh(\pi)}{\pi}\Big[\sum_{n>0}\frac{(-1)^nin}{1+n^2}e^{inx} - \frac{(-1)^{n}in}{1+n^2}e^{-inx}\Big] = $$
+
+$$\frac{\sinh(\pi)}{\pi}\Big[\sum_{n>0}\frac{(-1)^nin}{1+n^2}(e^{inx} - e^{-inx})\Big] = \frac{\sinh(\pi)}{\pi}\Big[\sum_{n>0}\frac{(-1)^{n+1}2n\sin(nx)}{1+n^2}\Big]\,.$$
+
+
+
+\end{description}
+
+\end{document} 

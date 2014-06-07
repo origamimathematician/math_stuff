@@ -1,0 +1,173 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 11}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.6}
+
+\item \textbf{Proposition.} The series $\sum \limits_{n=0}^\infty\frac{\cos(kx)}{\log(k+2)}$ converges to a non-negative function.
+
+\item\begin{proof} As the first step we will use summation by parts twice on the $N^{th}$ partial sum of the given series. Observe,
+
+$$\sum \limits_{n=0}^N\frac{\cos(kx)}{\log(k+2)} = \frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx) - \sum \limits_{n=0}^{N-1}\left( \frac{1}{\log(n+3)} -\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\cos(kx)\,.$$
+
+Considering the right-hand term of this expression and summing it by parts again we have
+
+$$- \sum \limits_{n=0}^{N-1}\left( \frac{1}{\log(n+3)} -\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\cos(kx) =$$
+
+$$-\left( \frac{1}{\log(N+2)} -\frac{1}{\log(N+1)} \right)\sum \limits_{n=0}^{N-1}\sum \limits_{k=0}^{n}\cos(kx)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\sum \limits_{j=0}^{k}\cos(jx)\,.$$
+
+Thus, the final expression is
+
+$$\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx)-\left( \frac{1}{\log(N+2)} -\frac{1}{\log(N+1)} \right)\sum \limits_{n=0}^{N-1}\sum \limits_{k=0}^{n}\cos(kx)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\sum \limits_{j=0}^{k}\cos(jx)\,.$$\begin{flushright}
+(*)
+\end{flushright}
+
+Before we consider the limit of this expression we will derive a formula for $\sum_{n=0}^{N}\sum_{k=0}^{n}\cos(kx)$. Consider the following
+
+$$\sum \limits_{n=0}^{N}\sum \limits_{k=0}^{n}\cos(kx) = \sum \limits_{n=0}^{N}\sum \limits_{k=0}^{n}\frac{e^{inx} + e^{-inx}}{2} = \sum \limits_{n=0}^{N}\left(\frac{1}{2}+\frac{1}{2}\sum \limits_{-n}^{n}e^{inx}\right) = \frac{N}{2} + \frac{1}{2}\sum \limits_{n=0}^{N}\sum \limits_{-n}^{n}e^{inx} =$$
+$$\frac{N+1}{2} + \frac{1}{2}\sum \limits_{n=1}^{N}\sum \limits_{-n}^{n}e^{inx}\,.$$
+
+By the formula calculated in exercise 1.44 we observe that
+
+$$\frac{N+1}{2} + \frac{1}{2}\sum \limits_{n=1}^{N}\sum \limits_{-n}^{n}e^{inx} = \frac{N+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{Nx}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Making appropriate substitutions into eq.(*) we obtain
+
+$$\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx)+\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right)\left(\frac{N}{2} + \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\right)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\left(\frac{n+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{nx}{2})}{\sin^2(\frac{x}{2})}\right)\,.$$
+
+Now we take the limit of this sum as $N \rightarrow \infty$. We will consider each of the three summands separately. First observe that since $\sum_{n=0}^N\cos(nx)$ is bounded and $\log(N+2)$ is an increasing function it follows that
+
+$$\lim\limits_{N \rightarrow \infty}\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx) = 0\,.$$
+
+Next, we consider the limit of the second summand
+
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right)\left(\frac{N}{2} + \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\right) = $$
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{N}{2\log(N+1)} -\frac{N}{2\log(N+2)} \right)+\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right) \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Note that first limit goes to zero (\textit{not sure how to show this but seems really similar to exercise 1.47}), which leaves us with
+
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right) \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Note that for each fixed value of $x$ $\frac{\sin^2((N-1)x/2)}{\sin^2(x/2)}$ is bounded. Therefore this second limit also goes to zero. Finally, we consider the limit of the last summand
+
+$$\lim\limits_{N \rightarrow \infty}\sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\left(\frac{n+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{nx}{2})}{\sin^2(\frac{x}{2})}\right)\,.$$
+
+\textit{I don't know how to proceed from here.}
+
+\end{proof}
+
+\item \textbf{Exercise 3.1}
+
+\item \textbf{Proposition.} The function $f(x) = e^{-x^2}$ is in the Schwartz space.
+
+\begin{proof} First we will show that $e^{-x^2}$ is smooth. First we calculate the first few derivatives of $f$, observe that
+
+$$f^{\prime} = -2xe^{-x^2}$$
+
+$$f^{\prime\prime} = (-2 +4x^2)e^{-x^2}$$
+
+and
+
+$$f^{\prime\prime\prime} = (12x-8x^3)e^{-x^2}\,.$$
+
+Thus, we see that the pattern seems to suggest that each $n^{th}$ derivative will be equal to a polynomial of degree $n$ times $e^{-x^2}$. We prove this using induction on $n$. Suppose that for $n$ we have
+
+$$f^{(n)} = P_ne^{-x^2}\,,$$
+
+where $P_n$ is a polynomial in $x$ of degree $n$. Then observe that by the product rule of differentiation
+
+$$f^{(n+1)} = P_n^{\prime}e^{-x^2} + P_n(-2xe^{-x^2}) = (P_n^{\prime} -2xP_n)e^{-x^2}\,.$$ 
+
+Since $(P_n^{\prime} -2xP_n)$ is a polynomial of degree $n+1$, it follows that the result holds for all $n \in \mathbb{N}$, by induction on $n$.
+
+Next we show that $f$ is indeed in the Schwartz space. We must show for all positive $a,n \in \mathbb{Z}$ that 
+
+$$\lim \limits_{|x|\rightarrow \infty} = |x|^a(\frac{d}{dx})^n f(x) = 0\,.$$
+
+Since $f(x)$ is an even function, we will consider only non-negative values of $x$ and and the limit at positive infinity. The limit at negative infinity is symmetric. We have previously established that the $n^{th}$ derivative of $f$ is the product of a $n^{th}$ degree polynomial, $P_n$, and $e^{-x^2}$. Thus, in general
+
+$$x^a(\frac{d}{dx})^n f(x) = \frac{x^a(P_n)}{e^{x^2}}\,.$$
+
+Here, $x^a(P_n)$ is an $(a+n)^{th}$ degree polynomial. Since the limit of the numerator and the denominator are both infinity as $x \rightarrow \infty$, we can apply L'Hospital’s rule repeatedly (since $x^a(P_n)$ and $e^{x^2}$ are both smooth). Hence, taking the $(a+n)^{th}$ derivative of both the numerator and the denominator, we see that
+
+$$\frac{(\frac{d}{dx})^{a+n}x^a(P_n)}{(\frac{d}{dx})^{a+n}e^{x^2}} = \frac{c}{P_{a+n}e^{x^2}}$$
+
+where $P_{a+n}$ is a $(a+n)^{th}$ degree polynomial and $c$ is a constant. It is easy to see that the limit of this ratio as $x \rightarrow \infty$ is equal to zero. Thus, $f(x) = e^{-x^2}$ is in the Schwartz space.
+
+\end{proof}
+
+
+
+\end{description}
+
+\end{document} 

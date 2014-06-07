@@ -1,0 +1,220 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework}
+\end{center}
+
+
+\begin{description}
+
+\item \textbf{Exercise 1.15}
+
+\item Set $z = e^{ix} = \cos(x) + i\sin(x)$. Then consider the expression
+
+$$\sum_{j=1}^k \cos[(2j-1)x] + i\sin[(2j-1)x]\,.$$
+
+Using De Moivre's Theorem we have the following equality
+
+$$\sum_{j=1}^k \cos[(2j-1)x] + i\sin[(2j-1)x] = \sum_{j=1}^k [\cos(x) + i\sin(x)]^{2j-1} = \sum_{j=1}^k z^{2j-1}\,.$$
+
+This final summation can be re-indexed to
+
+$$\sum_{j=1}^k z^{2j-1} = \sum_{j=0}^{k-1} z^{2j+1} = z\sum_{j=0}^{k-1} (z^{2})^j\,.$$
+
+This is a finite geometric series and therefore it follows that
+
+$$z\sum_{j=0}^{k-1} (z^{2})^j = z\frac{1-z^{2k}}{1-z^2} = \frac{1-z^{2k}}{z^{-1}-z}\,.$$
+
+We note that the denominator $z^{-1}-z$ is equal to $-i2\sin(x)$. Thus, we can separate the above expression into its real and imaginary parts as follows
+
+$$\frac{1-z^{2k}}{z^{-1}-z} = \frac{1-\cos(2kx) - i\sin(2kx)}{-i2\sin(x)} = \frac{\sin(2kx)}{2\sin(x)} + \frac{i(1-\cos(2kx))}{2\sin(x)}\,.$$
+
+In summary, we have the expression
+
+$$\sum_{j=1}^k \cos[(2j-1)x] + i\sin[(2j-1)x] = \sum_{j=1}^k \cos[(2j-1)x] + i\sum_{j=1}^k\sin[(2j-1)x] =  \frac{\sin(2kx)} {2\sin(x)} + \frac{i(1-\cos(2kx))}{2\sin(x)}\,.$$
+
+Since the real and imaginary parts of both sides must be equal, we see that
+
+$$\sum_{j=1}^k\sin[(2j-1)x] = \frac{(1-\cos(2kx))}{2\sin(x)}\,.$$
+
+\item \textbf{Exercise 1.21}
+
+\item{\bf{Proposition:}} 
+
+$$\lim_{\lambda_2 \rightarrow \lambda_1}\frac{(\lambda_2 e^{\lambda_1 x} - \lambda_1e^{\lambda_2 x})y(0) + (e^{\lambda_2x} - e^{\lambda_1x})y^{\prime}(0)}{\lambda_2 - \lambda_1} = e^{\lambda x}y(0) + xe^{\lambda x}(y^{\prime}(0) - \lambda y(0))$$
+
+for $\lambda = \lambda_1 = \lambda_2$.
+
+\begin{proof} We start by considering the limits of the numerator and the denominator. If we hold $x$ constant and consider the expression as a function of $\lambda_2$, then we observe the following:
+
+$$\lim_{\lambda_2 \rightarrow \lambda_1}(\lambda_2 e^{\lambda_1 x} - \lambda_1e^{\lambda_2 x})y(0) + (e^{\lambda_2x} - e^{\lambda_1x})y^{\prime}(0) = 0$$
+
+and
+
+$$\lim_{\lambda_2 \rightarrow \lambda_1} \lambda_2 - \lambda_1 = 0\,.$$
+
+Since the expression from our hyposthesis is the ratio of two functions that approach zero as $\lambda_2 \rightarrow \lambda_1$ we can apply L'Hospital's rule to the limit in question. Hence, we see that
+
+$$\lim_{\lambda_2 \rightarrow \lambda_1}\frac{(\lambda_2 e^{\lambda_1 x} - \lambda_1e^{\lambda_2 x})y(0) + (e^{\lambda_2x} - e^{\lambda_1x})y^{\prime}(0)}{\lambda_2 - \lambda_1}  =$$
+
+$$ \lim_{\lambda_2 \rightarrow \lambda_1}\frac{\frac{d}{d\lambda_2}[(\lambda_2 e^{\lambda_1 x} - \lambda_1e^{\lambda_2 x})y(0) + (e^{\lambda_2x} - e^{\lambda_1x})y^{\prime}(0)]}{\frac{d}{d\lambda_2}[\lambda_2 - \lambda_1]} = $$
+
+$$\lim_{\lambda_2 \rightarrow \lambda_1} (e^{\lambda_1 x} - \lambda_1 x e^{\lambda_2 x})y(0) + xe^{\lambda_2x}y^{\prime}(0) = $$
+
+$$e^{\lambda x}y(0) + xe^{\lambda x}(y^{\prime}(0) - \lambda y(0)) \text{ for } \lambda = \lambda_1 = \lambda_2\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 5 from D'Angelo HW2}
+
+\item{\bf{Proposition:}} 
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = 0 \text{ for } N \in \mathbb{N}\,.$$
+
+\begin{proof} In order to solve this problem, we will make the following substitution
+
+$$cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2}\,.$$
+
+Thus, the integral can be rewritten as
+
+$$\int_0^{2\pi} \cos^{2N}(\theta)d\theta = \int_0^{2\pi} \Big(\frac{e^{i\theta} + e^{-i\theta}}{2}\Big)^{2N}d\theta = $$
+
+$$2^{-2N} \int_0^{2\pi} (e^{i\theta} + e^{-i\theta})^{2N}d\theta\,.$$
+
+Using the binomial theorem we can rewrite this as
+
+$$2^{-2N} \int_0^{2\pi} \sum_{k=0}^{2N} {2N \choose k} (e^{i\theta})^{2N-k}(e^{-i\theta})^k d\theta = 2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \int_0^{2\pi}  e^{i\theta(2N-2k)} d\theta = $$
+$$2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \Big[\frac{e^{i2\theta(N-k)}}{i2(N-K)}\Big]_0^{2\pi} = 2^{-2N} \sum_{k=0}^{2N}{2N \choose k} \frac{1-1}{i2(N-K)} = 0\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 1.25}
+
+\item First we solve the equation $(D-\lambda)y = e^{\lambda x}$ using the method from section 4.1. We set $y = c(x)e^{\lambda x}$ and solve 
+for $c(x)$. Applying $(D-\lambda)$ to $y$, we obtain
+
+$$c^{\prime}(x)e^{\lambda x} = e^{\lambda x}\,.$$
+
+It then follows that
+
+$$c(x) = \int_{a}^{x}e^{\lambda t}e^{-\lambda t}dt = x - a\,.$$
+
+Setting $a = 0$ and making a substitution for $c(x)$ yields
+
+$$y = xe^{\lambda x}\,.$$
+
+We now apply this result to solve the equation $(D-\lambda)^2y = 0\,.$ First we note that $y = xe^{\lambda x}$ is a solution to this equation since 
+
+$$(D-\lambda)^2y = (D - \lambda)e^{\lambda x} = \lambda e^{\lambda x} - \lambda e^{\lambda x} =  0\,.$$
+
+From this it is easy to see that $e^{\lambda x}$ is also a solution since
+
+$$(D - \lambda)e^{\lambda x} = 0 \Leftrightarrow (D-\lambda)(D - \lambda)e^{\lambda x} = (D - \lambda)0 \Leftrightarrow (D - \lambda)^2 e^{\lambda x} = 0\,.$$
+
+Then by the principle of superposition, it follows that 
+
+$$y = c_1e^{\lambda x} + c_2xe^{\lambda x}$$
+
+is the general solution to $$(D-\lambda)^2y= 0$$ where $c_1$ and $c_2$ are some constants. Note that this is the same result that was obtained at the end of Corollary 1.4 where $\lambda_1 = \lambda_2$.
+
+\item \textbf{Exercise 1.31}
+
+\item We assume that we can treat the differential operator $D$ as if it where a nonzero number. Then we can use Taylor series to show that the equality $e^{Dt}f(x) = f(x+t)$ should hold. Observe that
+
+$$e^{Dt}f(x) = \Big[\sum_{n=0}^\infty \frac{(Dt)^n}{n!}\Big]f(x)\,.$$
+
+Distributing $f(x)$ through this sum and applying the differential operator to it, we obtain
+
+$$\Big[\sum_{n=0}^\infty \frac{(Dt)^n}{n!}\Big]f(x) = \sum_{n=0}^\infty \frac{f^{(n)}t^n}{n!}\,.$$
+
+If we then set $t = t +x -x$ we see that this is the general form of the Taylor series expansion for $f(t+x)$. Observe
+
+$$\sum_{n=0}^\infty \frac{f^{(n)}t^n}{n!} = \sum_{n=0}^\infty \frac{f^{(n)}(t+x-x)^n}{n!} = f(t+x)\,.$$
+
+\item \textbf{Complex Variable Primer Exercise 5}
+
+\item We would like to calculate $(1+i)^{98}$ without expanding the terms. Recall that we denote a complex number $z$ as follows
+
+$$z = |z|e^{i\theta}$$
+
+where $\theta$ is the angel of the vector $z$ from the real axis in the complex plane. We do this now with $z = (1+i)$. The modulus of this number is $\sqrt{2}$. If we normalize this vector we get
+
+$$\frac{z}{|z|} = \frac{1}{\sqrt{2}} + i\frac{1}{\sqrt{2}}\,.$$
+
+We note that this is equal to $\cos(\pi/4) + i\sin(\pi/4) = e^{i(\pi/4)}$. Hence we have
+
+$$(1+i)^{98} = (\sqrt{2}e^{i(\pi/4)})^{98} = 2^{49}e^{\pi(49/2)} = 2^{49}e^{24\pi + (\pi/2)} = 2^{49}e^{\pi/2} = i2^{49}$$
+
+\item \textbf{Complex Variable Primer Exercise 6}
+
+\item Consider $z = \frac{1+e^{i\theta}}{1-e^{i\theta}}$. We want to compute the modulus of $z$ as well as finding its real and imaginary parts. First we multiply $z$ by $\frac{1-e^{-i\theta}}{1-e^{-i\theta}}$. Observe that
+
+$$\Big(\frac{1+e^{i\theta}}{1-e^{i\theta}}\Big) \Big( \frac{1-e^{-i\theta}}{1-e^{-i\theta}} \Big) = \frac{1+e^{i\theta} - e^{-i\theta} - 1}{1 - e^{i\theta} -e^{-i\theta}+1} = \frac{i2\sin(\theta)}{2-2\cos(\theta)} = \frac{i\sin(\theta)}{1-\cos(\theta)}\,.$$
+
+Thus, the real part of $z$ is 0 and the imaginary part is $\frac{\sin(\theta)}{1-\cos(\theta)}$. We can now easily compute the modulus as follows
+
+$$|z|^2 = \Big(\frac{i\sin(\theta)}{1-\cos(\theta)}\Big)\Big(\frac{-i\sin(\theta)}{1-\cos(\theta)}\Big) = \frac{\sin^2(\theta)}{[1-\cos(\theta)]^2} =\frac{1-\cos^2(\theta)}{[1-\cos(\theta)]^2} = \frac{[1-\cos(\theta)][1+\cos(\theta)]}{[1-\cos(\theta)]^2} = \frac{1+\cos(\theta)}{1-\cos(\theta)}$$
+
+then
+
+$$|z| = \sqrt{\frac{1+\cos(\theta)}{1-\cos(\theta)}}\,.$$
+
+\end{description}
+
+
+
+\end{document} 

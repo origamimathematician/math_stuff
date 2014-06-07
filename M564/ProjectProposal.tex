@@ -1,0 +1,184 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Project Proposal}
+\end{center}
+
+
+\begin{description}
+
+\item \textbf{Introduction.}
+
+\tab The least squares method for generating a regression model is a powerful tool used in statistics, economics and the physical and social sciences. We briefly explore the derivation of this mathematical method and attempt to develop a basic intuition of the geometry involved in it. This leads to the realization that the least-squares method is in fact a projection operator in a real valued, finite-dimensional Hilbert space.
+
+\item \textbf{Least Squares.}
+
+\tab To begin we will examine the derivation for a linear regression model using the least squares method. Suppose that we have a set of points $(x_1,y_1)...(x_n,y_n)$ that represent some set of observations. We would like to determine a linear equation that we can use to make predictions about future observations based on the points we have already observed. We assume the equation has the form $y = \beta_1x+\beta_0$ where $\beta_0$ and $\beta_1$ are unknown. We determine the ``best'' values of these constant terms by minimizing the sum of the squared \textit{vertical} distance for each of the observed points from the line $y = \beta_1x+\beta_0$. Note that we denote these optimized values as $\hat{\beta_0}$ and $\hat{\beta_1}$. Using this method it can be shown that the following values of $\beta_1$ and $\beta_0$ minimize the sum of the squared distances:
+
+$$\hat{\beta_1} = \frac{\sum_{i=1}^n (y_i - \br{y})(x_i - \br{x})}{\sum_{i=1}^n (x_i - \br{x})^2}\,.$$
+
+$$\hat{\beta_0} = \br{y} - \hat{\beta_1}\br{x}$$
+
+Where $\br{x}$ and $\br{y}$ are the means of the observed $x$ and $y$ values respectively.
+
+\begin{proof} For $i = 1,2,...,n$ the distance from the line to the observed value of $y_i$ is given by
+
+$$|y_i - \beta_1x_i - \beta_0|\,.$$
+
+The sum of the squared distances is then
+
+$$S = \sum \limits_{i=1}^n (y_i - \beta_1x_i - \beta_0)^2\,.$$
+
+We then calculate the partial derivatives of this expression in terms of $\beta_1$ and $\beta_0$ which we can then to use to find a minimum value. Observe that
+
+$$\frac{\partial S}{\partial \beta_1} = -2\sum \limits_{i=1}^n x_i(y_i - \beta_1x_i - \beta_0)$$
+
+and
+
+$$\frac{\partial S}{\partial \beta_0} = -2\sum \limits_{i=1}^n (y_i - \beta_1x_i - \beta_0)\,.$$
+
+Setting these two derivatives equal to zero we have
+
+$$\sum \limits_{i=1}^n x_iy_i = \sum \limits_{i=1}^n \beta_1 x_i^2  + \beta_0 \sum \limits_{i=1}^n x_i$$
+
+and
+
+$$\sum \limits_{i=1}^n y_i = \sum \limits_{i=1}^n \beta_1x_i + n\beta_0\,.$$
+
+Solving for $\beta_0$ in the second equation yields 
+
+$$\beta_0 = \frac{\sum _{i=1}^n y_i - \beta_1\sum _{i=1}^nx_i}{n} = \br{y} - \beta_1\br{x}\,.$$
+
+Note that this is the expression is optimized when $\beta_1 = \hat{\beta_1}$. Hence, $\hat{\beta_0} = \br{y} - \hat{\beta_1}\br{x}$. We us this to solve for $\hat{\beta_1}$. Observe
+
+$$\sum \limits_{i=1}^n x_iy_i = \hat{\beta_1} \sum \limits_{i=1}^n x_i^2  + (\br{y} - \hat{\beta_1}\br{x})\sum \limits_{i=1}^n x_i = \hat{\beta_1} \sum \limits_{i=1}^n x_i^2  + \br{y}\sum \limits_{i=1}^n x_i - \hat{\beta_1}\br{x}\sum \limits_{i=1}^n x_i\,.$$
+
+Rearranging terms and isolating $\hat{\beta_1}$ we obtain
+
+$$\hat{\beta_1} = \frac{\sum_{i=1}^n x_iy_i - \br{y}\sum_{i=1}^n x_i}{\sum_{i=1}^n x_i^2 - \br{x}\sum_{i=1}^n x_i}\,.$$
+
+This expression can be rewritten in the desired form. First we consider the numerator, observe that
+
+$$\sum \limits_{i=1}^n x_iy_i - \br{y}\sum \limits_{i=1}^n x_i = \sum \limits_{i=1}^n x_iy_i - 2\br{y}\sum \limits_{i=1}^n x_i + \br{y}\sum \limits_{i=1}^n x_i =$$
+
+$$\sum \limits_{i=1}^n x_iy_i - 2\frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n} + \frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n} = \,.$$
+
+$$\sum \limits_{i=1}^n x_iy_i - \frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n} - \frac{\sum_{i=1}^nx_i\sum_{i=1}^n y_i}{n} + \frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n}$$
+
+We can then re-index the sums as follows
+
+$$\sum \limits_{j=1}^n x_jy_j - \sum\limits_{j=1}^n\frac{y_j \sum_{i=1}^n x_i}{n} - \sum\limits_{j=1}^n\frac{x_j \sum_{i=1}^n y_i}{n} + \sum\limits_{j=1}^n\frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n^2} = $$
+
+$$\sum \limits_{j=1}^n\Big[ x_jy_j - \frac{y_j \sum_{i=1}^n x_i}{n} - \frac{x_j \sum_{i=1}^n y_i}{n} + \frac{\sum_{i=1}^ny_i\sum_{i=1}^n x_i}{n^2}\Big] = $$
+
+$$\sum \limits_{j=1}^n( x_jy_j - y_j\bar{x} - x_j\bar{y}+ \bar{y}\bar{x}) = \sum \limits_{j=1}^n( x_j - \br{x})(y_j - \bar{y})\,.$$
+
+Replacing $y_i$ with $x_i$ we follows directly that the following equality also holds
+
+$$\sum_{i=1}^n x_i^2 - \br{x}\sum_{i=1}^n x_i = \sum_{i=1}^n (x_i - \br{x})^2\,.$$
+
+Hence we have shown that
+
+$$\hat{\beta_1} = \frac{\sum_{i=1}^n x_iy_i - \br{y}\sum_{i=1}^n x_i}{\sum_{i=1}^n x_i^2 - \br{x}\sum_{i=1}^n x_i} = \frac{\sum_{j=1}^n( x_j - \br{x})(y_j - \bar{y})}{\sum_{i=1}^n (x_i - \br{x})^2}\,.$$
+
+As the final step we will show that this is in fact a minimum. Computing the second partial derivatives of $S$ yields
+
+$$\frac{\partial^2 S}{\partial \beta_1^2} = 2\sum \limits_{i=1}^n x_i^2$$
+
+$$\frac{\partial^2 S}{\partial \beta_0^2} = 2n$$
+
+and
+
+$$\frac{\partial^2 S}{\partial \beta_1\beta_0} = 2\sum \limits_{i=1}^n x_i\,.$$
+
+Note that 
+
+$$\frac{\partial^2 S}{\partial \beta_1^2}\frac{\partial^2 S}{\partial \beta_0^2} - \Big(\frac{\partial^2 S}{\partial \beta_1\beta_0}\Big)^2 =  4n\sum \limits_{i=1}^n x_i^2 - 4\Big(\sum \limits_{i=1}^n x_i\Big)^2 > 0\,.$$
+
+Therefore
+
+$$\frac{\partial^2 S}{\partial \beta_1^2} \geq 0$$
+
+for all $\beta_1$. Hence, it follows that the values of $\hat{\beta_1}$ and $\hat{\beta_0}$ calculated above give the minimum value of the sum of squares. 
+
+\end{proof}
+
+\item \textbf{Extensions of Least Squares.}
+\tab A similar method as described above can be used to fit regression curves to higher degree polynomials in $x_i$ that are of the form
+
+$$x_i^nc_n + \dots + x_i^2c_2 + x_i\beta_1 + \beta_0\,.$$
+
+A system of equations can be created by taking the partial derivatives with respect to the $c_i$. This system can then be solved (provided a solution exists) to find the minimum values for the $c_i$. It is also natural to extend this method to the multivariate case given a set points $(y_1,x_1^1,...,x_n^1),(y_2,x_2^1,...,x_2^n),...,(y_m,x_m^1,...,x_m^n)$. The technique is similar to the ones laid out above.
+
+\tab It may also be of interest and worth to examine how this method extends into different spaces. It maybe possible to use a similar technique in order to compute a least squares equation in a normed vector space with an arbitrary norm. Perhaps of particular interest would be a norm other than the standard euclidean distance used in the least squares regression described above.
+
+\tab Another area that maybe even more compelling to consider a least squares method, or a similar method of minimizing distance, that focuses on orthogonal distance as opposed to vertical distance. It maybe a natural extension of this method to consider developing an approached of minimizing the sum of orthogonal ``distances'' of a set of vectors in an arbitrary (probably finite dimensional) Hilbert space. Using the inner product of a given Hilbert space and a set of vectors in the space, one maybe able to find a ``minimum'' subspace that minimizes the orthogonal projects of the set of vectors.
+
+\tab These ideas bear further consideration and we propose to investigate what theory there is (if any) exploring these extensions of the least squares method into more general spaces.
+
+\end{description}
+
+\end{document} 

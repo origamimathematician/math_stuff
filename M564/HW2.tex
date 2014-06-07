@@ -1,0 +1,279 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 2}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.13}
+
+\item \textbf{Proposition: }The Hermitian symmetric polynomial $R(t,\bar{t}) = a + bt + \bar{b}\bar{t} + c|t|^2$ has a minimum at the point $(-\bar{b}/c,-b/c)$, where $a \in \mathbb{R}$, $B \in \mathbb{C}$ and $c > 0$.
+
+\begin{proof} Set $t = x+iy$ and $b = k + iz$ for $x,y,k,z \in \mathbb{R}$. Then we can rewrite the Hermitian symmetric polynomial in terms of the two real variables $x$ and $y$. Observe that 
+
+$$a + bt + \bar{b}\bar{t} + c|t|^2 = a + (k + iz)(x + iy) + (k-iz)(x-iy) + c(x^2+y^2) = $$
+$$a + kx + izx +iky - zy + kx - izx - iky - zy + cx^2 + cy^2 = $$
+$$a + 2kx - 2zy + cx^2 + cy^2 = a + (cx^2 + 2kx) + (cy^2 - 2zy)\,.$$
+
+Taking the partial derivatives of this polynomial (which we call $f(x,y)$) we see that
+
+$$f_x = 2cx + 2k$$
+and
+$$f_y = 2cy - 2z\,.$$
+
+These derivatives are zero at the points $x = -k/c$
+and $y = z/c$ respectively. Next, we note that $f_{xx} = 2c = f_{yy}$ and $f_{xy} = 0$. Thus, the function $f$, has a minimum at the point $(-k/c,z/c)$. This means that the $R(t,\bar{t})$ has a minimum at the point $(-\bar{b}/c,-b/c)$.
+
+\end{proof}
+
+\item \textbf{Exercise 1.17}
+
+\item \textbf{Proposition: }The following series
+
+$$e^M = \sum_{n=0}^{\infty}\frac{M^n}{n!}\,,$$
+
+converges for any square matrix $M$, of complex numbers.
+
+\item \begin{proof}	We consider a general matrix form of the given series. Note that
+
+$$e^M = \sum_{n=0}^{\infty}\frac{M^n}{n!} = \begin{pmatrix}
+
+\sum_{n=0}^{\infty}\frac{(M^n)_{11}}{n!} & \m\m\m & \sum_{n=0}^{\infty}\frac{(M^n)_{1m}}{n!} \\
+
+\vdots & \ddots & \vdots \\
+
+\sum_{n=0}^{\infty}\frac{(M^n)_{m1}}{n!} & \m\m\m & \sum_{n=0}^{\infty}\frac{(M^n)_{mm}}{n!} \\
+
+\end{pmatrix} = 
+\begin{pmatrix}
+\sum_{n=0}^{\infty}\frac{(M^n)_{jk}}{n!}\\
+\end{pmatrix}_{1\leq j,k \leq m}
+\,,$$
+
+where $(M^n)_{jk}$ represents the entry from the $j^{th}$ row and $k^{th}$ column of the matrix $M^n$. We then set $A = \max{\lbrace|M_{jk}|\rbrace}$. Next, we prove by induction on $n$ that 
+
+	$$|(M^n)_{jk}| \leq m^{n-1}A^n \text{ for } 1 \leq j,k \leq m\,.  (*)$$
+	
+By definition $|M_{jk}| \leq A$ for $1 \leq j,k \leq m$. In order to illustrate the inductive argument, we will also consider the case of $|(M^2)_{jk}|$. Setting $R_j$ and $C_k$ to the $j^{th}$ row vector and the $k^{th}$ column vector of $M$ respectively, we observe that
+
+$$|(M^2)_{jk}| \leq |R_j \m C_k|\,.$$
+
+Note that the modulus of the product, of any two entries in $R_j$ and $C_k$ must be bounded by $A^2$. The dot product of the two vectors in $\mathbb{C}^m$ gives us a sum of $m$ items. Hence, it follows that 
+
+$$|(M^2)_{jk}| \leq |R_j \m C_k| \leq mA^2\,.$$
+
+We now proceed inductively on $n$. Assume that for a given $n$ the result from (*) holds. Next, consider the case of $n+1$, i.e., $|(M^{n+1})_{jk}|$. Setting $(R^n)_{j}$ equal to the $j^{th}$ column vector of $M^n$, we observe that
+
+$$|(M^{n+1})_{jk}| = |(R^n)_j \m C_k|\,.$$
+
+Consider the vector $(R^n)_j$; we see that it is equal to
+
+$$\Big((R^{n-1})_j \m C_1, (R^{n-1})_j \m C_2,...,(R^{n-1})_j \m C_m \Big)\,.$$
+
+We note that by our induction hypothesis, the modulus of each of the $m$ entries in this vector is less than or equal to $m^{n-1}A^n$. The modulus of each of the entries in $C_k$ is less than or equal to $A$. Thus, it follows that 
+
+$$|(M^{n+1})_{jk}| = |(R^n)_j \m C_k| \leq m^{n}A^n+1\,,$$
+
+and by induction on $n$ we see that the result holds for all $n \in \mathbb{N}$. As our final step we note that the above result indicates that
+
+$$\begin{pmatrix}
+\sum_{n=0}^{\infty}\frac{|(M^n)_{jk}|}{n!}\\
+\end{pmatrix}_{1\leq j,k \leq m} \leq 
+\begin{pmatrix}
+\sum_{n=0}^{\infty}\frac{m^{n-1}A^n}{n!}\\
+\end{pmatrix}_{1\leq j,k \leq m}\,.$$
+
+Observe that 
+$$\sum_{n=0}^{\infty}\frac{m^{n-1}A^n}{n!} = \frac{1}{m}\sum_{n=0}^{\infty}\frac{m^{n}A^n}{n!} = m^{-1}e^{mA}\,.$$
+
+Thus, each entry in the matrix $\begin{pmatrix}
+\sum_{n=0}^{\infty}\frac{|(M^n)_{jk}|}{n!}\\
+\end{pmatrix}_{1\leq j,k \leq m}$ converges and therefore $e^M$ must converge.
+
+\end{proof}
+
+\item \textbf{Exercise 1.18}
+
+\item \textbf{Proposition: }If $B$ is an invertible matrix, then for each positive integer $k$ 
+
+$$(BMB^{-1})^k = BM^kB^{-1}\,.$$
+
+\begin{proof} We will prove this by induction on $k$. For $k = 2$ we see that
+
+$$(BMB^{-1})^2 = BMB^{-1}BMB^{-1} = BM^2B^{-1}\,.$$
+
+Now we assume that the result holds for $n$ and we will show that the same is true for $n+1$. Observe that 
+
+$$(BMB^{-1})^n+1 = (BMB^{-1})^nBMB^{-1} = BM^nB^{-1}BMB^{-1} = BM^{n+1}B^{-1}\,.$$
+
+Thus, the result holds for all $n \in \mathbb{N}$.
+
+\end{proof}
+
+\item \textbf{Exercise 1.19}
+
+\item \textbf{Proposition: } If $B$ is invertible, then $Be^{M}B^{-1} = e^{BMB^{-1}}$.
+
+\begin{proof} Observe that
+
+$$Be^MB^{-1} = B\Big[\sum_{n=0}^\infty \frac{M^n}{n!}\Big]B^{-1} = \sum_{n=0}^\infty \frac{BM^nB^{-1}}{n!} = \sum_{n=0}^\infty \frac{(BMB^{-1})^n}{n!} = e^{BMB^{-1}}\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 1.22}
+
+\item \textbf{Proposition: }For $A = \begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix}$, $e^{At} = \begin{pmatrix}
+e^{{\lambda}t} & 1+te^{{\lambda}t} \\
+0 & {e^{\lambda}t}
+\end{pmatrix}$.
+
+\begin{proof} First we will show by induction on $n$ that $A^n = \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}$. For $n = 2$, it is easy to see that
+
+$$A^2 = \begin{pmatrix}
+\lambda^2 & 2\lambda^{} \\
+0 & \lambda^2
+\end{pmatrix}\,.$$
+
+Assume that this result holds for a given $n$. Then we consider the case for $n+1$. Observe that
+
+$$A^{n+1} = A^nA =  \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}\begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix} = \begin{pmatrix}
+\lambda^{n+1} & (n+1)\lambda^{n} \\
+0 & \lambda^{n+1}
+\end{pmatrix}\,.$$
+
+Thus, we see that the result holds for all $n \in \mathbb{N}$. Now we can examine $e^{At}$. We know that 
+
+$$e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!}\,.$$
+
+Using the above result for $A^n$, this can be rewritten as
+
+$$\sum_{n=0}^{\infty} \frac{(At)^n}{n!} = \begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=0}^{\infty} \frac{n\lambda^{n-1} t^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = 
+\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=0}^{\infty} \frac{\lambda^{n-1} t^n}{(n-1)!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \,.$$
+$$\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & 1+ t\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \begin{pmatrix}
+e^{{\lambda}t} & 1+te^{{\lambda}t} \\
+0 & {e^{\lambda}t}
+\end{pmatrix}\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 1.24}
+
+\item As an initial step we would like to find the general solution to the homogeneous differential equation $(D^2 + m^2)y = 0$. Observe that we can factor the differential operator term so that we obtain
+
+$$(D + im)(D - im) = 0\,.$$
+
+Then by inspection, and application of corollary 1.4, we obtain the general solution
+
+$$y_0 = c_1e^{-imx} + c_2e^{imx}\,.$$
+
+We now attempt to generate a particular solution to the inhomogeneous differential equation $(D^2 + m^2) = e^x$ using the method outlined in 4.1. First, we start with the expression $(D - im)g_1 = e^x$ and solve for $g_1$. We assume a solution of the form $g_1 = c(x)e^{imx}$. Then it follows that
+
+$$(D-im)g_1 = c^{\prime}(x)e^{imx} + c(x)ime^{imx} -c(x)ime^{imx} = c^{\prime}(x)e^{imx} = e^x\,.$$
+
+Solving for $c(x)$ we obtain
+
+$$c(x) = \int_{a}^x e^te^{-imt}dt $$
+
+and substituting this into $g_1 = c(x)e^{imx}$ we get
+
+$$g_1 = e^{imx}\int_{a}^x e^{t(1-im)}dt = \frac{-1}{1-im}e^{imx}[ e^{x(1-im)} - \lim_{a \rightarrow \infty} e^{a(1-im)}] = -(1-im)^{-1}e^x\,.$$
+
+We now consider the expression $(D+im)g_2 = g_1 = -(im)^{-1}e^x$ and we solve for $g_2$. By a similar process as above we obtain
+
+$$g_2 = -(1+im)^{-1}e^{-imx}\int_{a}^x e^{t(1+im)}dt = \frac{-e^x}{(1+im)(1-im)} = \frac{-e^x}{1+m^2}\,.$$
+
+Thus, the general solution to the inhomogeneous differential equation $(D^2 + m^2)y = e^x$ is
+
+$$y = c_1e^{-imx} + c_2e^{imx} - (1+m^2)^{-1}e^x\,.$$
+
+
+
+
+\end{description}
+
+\end{document} 

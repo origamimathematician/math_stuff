@@ -1,0 +1,177 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 7}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 2.2}
+
+\item \textbf{Proposition.} The Cauchy-Schwarz inequality $|\langle x,y \rangle| \leq \|x\|\|y\|$ holds in $\mathbb{R}^n$.
+
+\begin{proof} We will prove the Cauhcy-Schwarz inequality using induction. In particular, we will show the following for $\mathbb{R}^n$
+
+$$\|x\|^2\|y\|^2-|\langle x,y \rangle|^2 = \sum_{i=1}^n x_i^2\sum_{i=1}^ny_i^2 -   \Big(\sum_{i=1}^nx_iy_i\Big)^2 = \sum_{1 \leq j < k \le n}^n (x_jy_k - x_ky_j)^2$$
+
+for all $n \in \mathbb{N}$. Note that since the right most expression is a sum of square terms, it must be non-negative. We proceed with a proof by induction.
+
+\begin{description}
+\item \textbf{Basis Step.} We start with the case of $n = 2$ since the $n=1$ case is too trivial for the proof. Observe that
+
+$$\sum_{i=1}^2 x_i^2\sum_{i=1}^2y_i^2 -   \Big(\sum_{i=1}^2x_iy_i\Big)^2 = (x_1^2+x_2^2)(y_1^2+y_2^2) - (x_1y_1+ x_2y_2)^2 = $$
+
+$$(x_1y_1)^2+(x_2y_1)^2+(x_1y_2)^2+(x_2y_2)^2 - (x_1y_1)^2 - 2x_1y_1x_2y_2 - (x_2y_2)^2 = $$
+
+$$(x_1y_2)^2 - 2x_1y_1x_2y_2 + (x_2y_1)^2 = (x_1y_2 - x_2y_1)^2\,.$$
+
+Thus the result holds for $n = 2$.
+
+\item \textbf{Induction Step.} Assume that for $n$ the result holds. Then we consider the case of $n+1$. We examine the following expression
+
+$$\sum_{i=1}^{n+1} x_i^2\sum_{i=1}^{n+1}y_i^2 -   \Big(\sum_{i=1}^{n+1}x_iy_i\Big)^2\,.$$
+
+Extracting the $n+1^{st}$ term from each summation we can expand as follows
+
+$$\sum_{i=1}^{n+1} x_i^2\sum_{i=1}^{n+1}y_i^2 -   \Big(\sum_{i=1}^{n+1}x_iy_i\Big)^2 = $$
+
+$$\Big(x_{n+1}^2 + \sum_{i=1}^{n} x_i^2\Big)\Big(y_{n+1}^2 + \sum_{i=1}^{n}y_i^2\Big) -   \Big(x_{n}y_{n+1} + \sum_{i=1}^{n}x_iy_i\Big)^2 = $$
+
+$$x_{n+1}^2y_{n+1}^2 + y_{n+1}^2\sum_{i=1}^{n} x_i^2 + x_{n+1}^2\sum_{i=1}^{n}y_i^2 + \sum_{i=1}^{n}x_i^2\sum_{i=1}^{n}y_i^2 $$
+
+$$- x_{n+1}^2y_{n+1}^2 - 2x_{n+1}y_{n+1}\sum_{i=1}^{n}x_iy_i - \Big(\sum_{i=1}^{n}x_iy_i\Big)^2\,.$$
+
+We observe that by our induction hypothesis $\sum_{i=1}^{n} x_i^2\sum_{i=1}^{n}y_i^2 -   \Big(\sum_{i=1}^{n}x_iy_i\Big)^2 = \sum_{1 \leq j < k \le n}^n (x_jy_k - x_ky_j)^2$. Hence we consider the following terms from the previous expression
+
+$$x_{n+1}^2y_{n+1}^2 + y_{n+1}^2\sum_{i=1}^{n} x_i^2 + x_{n+1}^2\sum_{i=1}^{n}y_i^2- x_{n+1}^2y_{n+1}^2 - 2x_{n+1}y_{n+1}\sum_{i=1}^{n}x_iy_i = $$
+
+$$y_{n+1}^2\sum_{i=1}^{n} x_i^2 - 2x_{n+1}y_{n+1}\sum_{i=1}^{n}x_iy_i + x_{n+1}^2\sum_{i=1}^{n}y_i^2 = \,.$$
+
+$$\sum_{j=1}^n (x_jy_{n+1})^2-2x_jy_{n+1}x_{n+1}y_j+(x_{n+1}y_j)^2 = \sum_{j=1}^n (x_jy_{n+1} - x_{n+1}y_j)^2$$
+
+Thus, we have 
+
+$$\sum_{i=1}^{n+1} x_i^2\sum_{i=1}^{n+1}y_i^2 -   \Big(\sum_{i=1}^{n+1}x_iy_i\Big)^2 = \sum_{1 \leq j < k \le n}^n (x_jy_k - x_ky_j)^2 + \sum_{j=1}^n (x_jy_{n+1} - x_{n+1}y_j)^2 = $$
+
+$$\sum_{1 \leq j < k \le n}^{n+1} (x_jy_k - x_ky_j)^2\,.$$
+
+Consequently, by induction on $n$, the result holds for all $n \in \mathbb{N}$.
+
+\end{description}
+
+\end{proof}
+
+\item \textbf{Exercise 2.3}
+
+\item \textbf{Proposition.} The Cauchy-Schwarz inequality $|\langle x,y \rangle| \leq \|x\|\|y\|$ holds in $\mathbb{R}^n$.
+
+\begin{proof} We use the method of Lagrange multipliers for this proof. First note that The inequality
+
+$$\sum_{i=1}^nx_iy_i \leq \Big(\sum_{i=1}^n x_i^2\Big)^{\frac{1}{2}}\Big(\sum_{i=1}^ny_i^2\Big)^{\frac{1}{2}}$$
+
+is equivalent to 
+
+$$\sum_{i=1}^nx_i\frac{y_i}{\|y\|} \leq \Big(\sum_{i=1}^n x_i^2\Big)^{\frac{1}{2}}\,.$$
+
+Hence we will consider the expression $\sum_{i=1}^nx_iz_i$ (which we refer to as [*]) where $z_i = \frac{y_i}{\|y\|}$. We then use Lagrange multipliers to maximize this function. First note that we treat $\vec{x}$ as fixed and maximize this function with respect to $\vec{y}$. We use $\sum_{i=1}^nz_i^2 = 1$ as a constraint since
+
+$$\|z\| = \Big(\sum_{i=1}^nz_i^2\Big)^{\frac{1}{2}} = 1 = \sum_{i=1}^nz_i^2$$
+
+(due to $\vec{z}$ being normalized). The Lagrangian of this system is 
+
+$$\Lambda(\vec{z},\lambda) = \sum_{i=1}^nx_iz_i + \lambda\Big(\sum_{i=1}^nz_i^2 - 1\Big)\,.$$
+
+Computing the gradient of this in terms of the $z_i$ and $\lambda$ gives us
+
+$$\nabla_{\vec{z},\lambda}\Lambda(\vec{z},\lambda) =\Big( \vec{x} + 2\lambda\vec{z}, \sum_{i=1}^nz_i^2 - 1\Big) = \Big( \vec{x} + 2\lambda\vec{z}, 0\Big) = \vec{x} + 2\lambda\vec{z}\,.$$
+
+Now setting this equal to zero we observe that
+
+$$\vec{x} = -2\lambda\vec{z}\,.$$
+
+Since we have two vectors that are equal, we know that their norms are equal as well. Thus,
+
+$$\frac{\|x\|}{2} = |\lambda|\|z\| = |\lambda|\,.$$
+
+Making this substitution for $\lambda$ into the expression $\nabla\sum_{i=1}^nx_iz_i = -\lambda\nabla\sum_{i=1}^nz_i^2$ yields the following
+
+$$\vec{x} = \frac{\|x\|}{2}2\vec{z} = \|x\|\vec{z}$$
+
+which implies
+
+$$\vec{z} = \frac{\vec{x}}{\|x\|}\,.$$
+
+Therefore, this is the value of $\vec{z}$ that gives us a maximum for the function [*]. This implies that
+
+$$\sum_{i=1}^nx_iz_i \leq \sum_{i=1}^nx_i\frac{x_i}{\|x\|} = \frac{\sum_{i=1}^nx_i^2}{\big(\sum_{i=1}^nx_i^2\big)^\frac{1}{2}} = \Big(\sum_{i=1}^nx_i^2\Big)^\frac{1}{2} = \|x\|\,.$$
+
+This gives us the equivalent inequality that we wanted. Thus, the result holds.
+
+\end{proof}
+
+\end{description}
+
+\end{document} 

@@ -1,0 +1,240 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 6}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.3}
+
+\item \textbf{Proposition.} If $\sum c_j \rightarrow L$ and $\lim \limits_{n \rightarrow \infty} nc_n = 0$,then $\sum_{n=1}^\infty n(c_{n+1} - c_n) = -L$.
+
+\begin{proof} Let $C_N$ be the $N^{th}$ partial sum of the series $\sum c_j$. Observe that the $N^{th}$ partial sum of $\sum_{n=1}^\infty n(c_{n+1} - c_n)$ is equal to
+
+$$(c_2 - c_1) + 2(c_3 - c_2) + \dots + N(c_{N+1} - c_N) =$$
+
+$$ -c_1-c_2-c_3-\dots - c_N + Nc_{N+1} = $$
+
+$$-C_N + (N+1)c_{N+1} - c_{N+1}\,.$$
+
+Taking the limit of this expression as $N \rightarrow \infty$ we see that
+
+$$ \lim \limits_{N \rightarrow \infty} (-C_N + (N+1)c_{N+1} - c_{N+1}) = $$
+
+$$ -L + \lim \limits_{N \rightarrow \infty}(N+1)c_{N+1} - \lim \limits_{N \rightarrow \infty}c_{N+1} = $$
+
+$$-L + 0 - 0 = -L\,.$$
+
+Note that the right-hand limits follow from the hypothesis.
+
+\end{proof}
+
+\item \textbf{Exercise 1.44} 
+
+\item \textbf{Proposition.} Given $D_k = \sum_{-k}^{k} e^{inx}$ and $F_N = \frac{D_0 + \dots + D_{N-1}}{N}$, the following equality holds
+
+$$F_N(x) = \frac{1}{N}\frac{\sin^2(\frac{Nx}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+\begin{proof} We start by making the following simple observations
+
+$$F_N(x) = \frac{1}{N}\sum_0^{N-1}D_k(x) = \frac{1}{N}\sum_0^{N-1}\sum_{-k}^k e^{ijx} = \frac{1}{N}\sum_0^{N-1}\sum_{-k}^k w^j\,.$$
+
+Here we set $w = e^{ix}$ (note that this also implies $w^{-1} = \bar{w}$). Next we multiply the inner summation by the factor $\bar{w}^k/\bar{w}^k$, which yields
+
+$$\frac{1}{N}\sum_0^{N-1}\sum_{-k}^k w^j = \frac{1}{N}\sum_0^{N-1} \frac{\bar{w}^k}{\bar{w}^k} \sum_{-k}^k w^j = \frac{1}{N}\sum_0^{N-1} \frac{1}{\bar{w}^k} \sum_{-k}^k w^{j-k}\,.$$
+
+Now consider the inner summation $\sum_{-k}^k w^{j-k}$. We observe that when $j = -k$ the exponent on $w$ is equal to $-2k$ and when $j = k$ it is equal to zero. Hence, we see that we can re-index this summation as follows
+
+$$\frac{1}{N}\sum_0^{N-1} \frac{1}{\bar{w}^k} \sum_{-k}^k w^{j-k} = \frac{1}{N}\sum_0^{N-1} \frac{1}{\bar{w}^k} \sum_{0}^{2k} w^{-j}\,.$$
+
+Note that the inner summation now has the form of a finite geometric series. Therefore we see that
+
+$$\frac{1}{N}\sum_0^{N-1} \frac{1}{\bar{w}^k} \sum_{0}^{2k} w^{-j} = \frac{1}{N}\sum_0^{N-1} w^k \frac{1-\bar{w}^{2k+1}}{1-\bar{w}} = \frac{1}{N}\frac{1}{1-\bar{w}}\sum_0^{N-1} w^k-\bar{w}^{k+1}\,.$$
+
+We can now break up the final summation and obtain two more finite geometric series. It follows that
+
+$$\frac{1}{N}\frac{1}{1-\bar{w}}\Big[\sum_0^{N-1} w^k-\bar{w}^{k+1} \Big] = \frac{1}{N}\frac{1}{1-\bar{w}}\Big[\sum_0^{N-1} w^k- \sum_0^{N-1}\bar{w}^{k+1}\Big] = $$
+
+$$\frac{1}{N}\frac{1}{1-\bar{w}}\Big[\frac{1-w^N}{1-w}- \bar{w}\frac{1-\bar{w}^N}{1-\bar{w}}\Big] = \frac{1}{N}\frac{1}{1-\bar{w}}\Big[\frac{1-w^N}{1-w}- \frac{1-\bar{w}^N}{w-1}\Big] = $$
+
+$$\frac{1}{N}\frac{1}{|1-w|^2}(1-w^N+ 1-\bar{w}^N) =\frac{1}{N}\frac{1}{|1-w|^2}(2-w^N-\bar{w}^N)\,.$$
+
+Now consider the term $2-w^N - \bar{w}^N$. Recall that $w = e^{inx}$. Using this fact, and Euler's formula, it follows that
+
+$$2-w^N - \bar{w}^N = 2-2\cos(Nx)\,.$$
+
+Similarly, we see that 
+
+$$|1-w|^2 = (1-w)(1-\bar{w}) = 2-2\cos(x)\,.$$ 
+
+Hence, we arrive at the following expression
+
+$$\frac{1}{N}\frac{1}{|1-w|^2}(2-w^N-\bar{w}^N)=\frac{1}{N}\frac{2-2\cos(Nx)}{2-2\cos(x)}\,.$$
+
+Finally, using the trig identity $\sin^2(a/2) = (1-\cos(a))/2$ (we prove this in the next exercise), we obtain
+
+$$F_N(x) = \frac{1}{N}\frac{2-2\cos(Nx)}{2-2\cos(x)} = \frac{1}{N}\frac{\frac{1-\cos(Nx)}{2}}{\frac{1-\cos(x)}{2}} = \frac{1}{N}\frac{\sin^2(\frac{Nx}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+	
+\end{proof}
+
+\item \textbf{Exercise 1.45}
+
+\item \textbf{Proposition.} $\sin^2(\frac{x}{2}) = \frac{1-\cos(x)}{2}$.
+
+\begin{proof} Observe that 
+
+$$\sin^2(\frac{x}{2}) = \Big(\frac{e^{i(x/2)} - e^{-i(x/2)}}{i2}\Big)^2 = \frac{e^{ix} - 2 + e^{-ix}}{-4} = $$
+
+$$\frac{1}{2} - \frac{e^{ix} + e^{-ix}}{2\m2} = \frac{1-\cos(x)}{2}\,.$$
+
+\end{proof}
+
+
+\item \textbf{Exercise 1.46}
+
+\item \textbf{Proposition.} The function $f(x) = \log(x)^{-1}$ is convex and decreasing. It therefore has the property that $f(x+2)+f(x) \geq 2f(x+1)$.
+
+\begin{proof} First note that since $\log(x)$ is a monotonically increasing function, $\log(x)^{-1}$ is a decreasing function. Next we consider the second derivative of $f$. observe that
+
+$$\frac{d}{dx} \log(x)^{-1} = -\log(x)^{-2}x^{-1}$$
+
+and 
+
+$$\frac{d}{dx} -\log(x)^{-2}x^{-1} = \log(x)^{-2}x^{-2} + 2\log(x)^{-3}x^{-2}\,.$$
+
+Note that both terms in this expression are positive for $x>1$. Thus, the $f(x)$ is convex for $x >1$. It follows from the convexity of $f$ that for $x > 1$
+
+$$\frac{f(x) - f(x+1)}{x - (x+1)} \leq \frac{f(x+1) - f(x+2)}{x+1 - (x+2)} \Rightarrow$$
+
+$$-f(x) + f(x+1) \leq -f(x+1) + f(x+2) \Rightarrow$$
+
+$$f(x+2)+f(x) \geq 2f(x+1)\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 1.47}
+
+\item \textbf{Proposition.} $\lim \limits_{x \rightarrow \infty} x \Big( \frac{1}{\log(x)}  + \frac{1}{\log(x+2)} - \frac{2}{\log(x+1)}\Big) = 0$
+
+\begin{proof} We begin be noting that using the inequality from Exercise 1.46, we see that
+
+$$x \Big( \frac{1}{\log(x)}  + \frac{1}{\log(x+2)} - \frac{2}{\log(x+1)}\Big) \geq x \Big( \frac{1}{\log(x)}  + \frac{1}{\log(x+2)} - \frac{1}{\log(x)}  - \frac{1}{\log(x+2)}\Big) = 0\,.$$
+
+Thus, the limit is bounded below by zero. Next, again consider the given limit and note that it can be rewritten as follows
+
+$$\lim \limits_{x \rightarrow \infty} x \Big( \frac{1}{\log(x)}  + \frac{1}{\log(x+2)} - \frac{2}{\log(x+1)}\Big) = $$
+
+$$\lim \limits_{x \rightarrow \infty}x \Big(\frac{1}{\log(x+2)} - \frac{1}{\log(x+1)} - \Big[\frac{1}{\log(x+1)}- \frac{1}{\log(x)}\Big] \Big)\,.$$
+
+If we now treat each difference inside the limit as an integral over an interval of length one we obtain the following
+
+$$\lim \limits_{x \rightarrow \infty}x \Big(\frac{1}{\log(x+2)} - \frac{1}{\log(x+1)} - \Big[\frac{1}{\log(x+1)}- \frac{1}{\log(x)}\Big] \Big) = $$
+
+$$\lim \limits_{x \rightarrow \infty}x \Big(\int_{x+1}^{x+2}\frac{-1}{t\log(t)^2}dt - \int_{x}^{x+1}\frac{-1}{t\log(t)^2}dt \Big)\,.$$
+
+Note that since each integral is over an interval of length one, we know that each of them are less than or equal to one times the maximum value of the function in that interval. Thus, we see that
+
+$$\lim \limits_{x \rightarrow \infty}x \Big(\int_{x+1}^{x+2}\frac{-1}{t\log(t)^2}dt - \int_{x}^{x+1}\frac{-1}{t\log(t)^2}dt \Big) \leq $$
+
+$$\lim \limits_{x \rightarrow \infty}x \Big(\frac{-1}{(x+2)\log(x+2)^2} + \frac{1}{x\log(x)^2} \Big)\,.$$
+
+Observe that multiplying the $x$ through yields
+
+$$\lim \limits_{x \rightarrow \infty} \Big(\frac{-x}{(x+2)\log(x+2)^2} + \frac{1}{\log(x)^2} \Big)\,.$$
+
+The second term clear goes to zero as $x \rightarrow \infty$. The first term has a degree one polynomial of $x$ in the numerator and the denominator. However, it also has a factor of $\log(x+2)^2$. Hence, this term will also go to zero as $x \rightarrow \infty$. Consequently, we have shown that the limit given in the hypothesis is bounded above and below by functions that approach zero as $x \rightarrow \infty$. Thus, the limit must be equal to zero.
+
+\end{proof}
+
+\item \textbf{Exercise 1.51}
+
+\item \textbf{Proposition.} $\Delta u = 4u_{z\overline{z}}$
+
+\begin{proof} We are given the definitions of the complex partial derivatives. They are
+
+$$\frac{\partial}{\partial z} = \frac{1}{2}(\frac{\partial}{\partial x} - i\frac{\partial}{\partial y})$$
+
+and
+
+$$\frac{\partial}{\partial\overline{z}} = \frac{1}{2}(\frac{\partial}{\partial x} + i\frac{\partial}{\partial y})\,.$$
+
+Consider the expression 
+
+$$4\frac{\partial^2u}{\partial z \partial\overline{z}}\,.$$
+
+Making substitutions using the above definitions we have
+
+$$4\frac{\partial^2u}{\partial z \partial\overline{z}} = 4\Big[\frac{1}{2}(\frac{\partial u}{\partial x} - i\frac{\partial u}{\partial y})\frac{1}{2}(\frac{\partial u}{\partial x} + i\frac{\partial u}{\partial y})\Big] = \,.$$
+
+$$(\frac{\partial u}{\partial x} - i\frac{\partial u}{\partial y})(\frac{\partial u}{\partial x} + i\frac{\partial u}{\partial y}) = \frac{\partial^2u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = \Delta u\,.$$
+
+\end{proof}
+
+\end{description} 
+
+\end{document} 

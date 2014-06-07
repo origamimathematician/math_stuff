@@ -1,0 +1,394 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 7}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 2.5}
+
+\item \textbf{Proposition.} Let $V$ be a complex vector space with a norm $\|\cdot\|$. If for all $z,w \in V$, we have 
+
+$$\|z+w\|^2 + \|z-w\|^2 = 2(\|z\|^2 + \|w\|^2) \text{ (Parallelogram Law)}$$
+
+then the given norm induces an inner product $\langle \cdot, \cdot \rangle$.
+
+%%%%%%%%%%%Proof%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proof} We assume that the parallelogram law holds for the norm on $V$. We then define the function $\langle \cdot, \cdot \rangle : V \times V \rightarrow \mathbb{C}$ and show that it satisfies all of the properties of an inner product. 
+
+For $z,w \in V$, we use the polarization identity to define $\langle \cdot, \cdot \rangle : V \times V \rightarrow \mathbb{C}$ as follows:
+
+$$4\langle z, w \rangle = \|z+w\|^2 + i\|z+iw\|^2 - \|z-w\|^2 - i\|z-iw\|^2\,.$$
+
+We begin by proving a very simple identity.
+
+%%%%%%%%%%%%%%%Zero%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item \textbf{Zero Identity.} For any $z \in V$ we have
+
+$$\langle z,0 \rangle = \langle 0,z \rangle = 0\,.$$
+
+\begin{proof} Using the polarization identity we see that
+
+$$\langle z,0 \rangle = \|z\|^2 + i\|z\|^2 - \|z\|^2 - i\|z\|^2 = 0\,.$$
+
+A similiar argument proves the result for $\langle 0,z \rangle$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%END Zero%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In order to simplify some future calculations, we now define a summation identity for the inner product.
+
+%%%%%%%%%%%%%%%Summation%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item\textbf{Summation Property.} Given $z,w,u,x \in V$
+
+$$\langle z,w \rangle + \langle u,x \rangle = \frac{1}{2}[\langle z+u,w+x \rangle + \langle z-u,w-x \rangle]$$
+
+\begin{proof} Observe that 
+
+$$4[\langle z, w \rangle + \langle u, x \rangle] = $$
+
+$$\|z+w\|^2 + i\|z+iw\|^2 - \|z-w\|^2 - i\|z-iw\|^2 + $$
+$$\|u+x\|^2 + i\|u+ix\|^2 - \|u-x\|^2 - i\|u-ix\|^2\,.$$
+
+Applying the parallelogram law appropriate pairs of summands we obtain
+
+$$\|z+w\|^2 + i\|z+iw\|^2 - \|z-w\|^2 - i\|z-iw\|^2 + $$
+$$\|u+x\|^2 + i\|u+ix\|^2 - \|u-x\|^2 - i\|u-ix\|^2 = $$
+
+$$\frac{1}{2}\big[\|z+w+u+x\|^2 + \|z+w-u-x\|^2 + i\|z+iw+u+ix\|^2 + i\|z+iw-u-ix\|^2 - $$
+$$\|z-w+u-x\|^2 - \|z-w-u+x\|^2 -i\|z-iw+u-ix\|^2 - i\|z-iw-u+ix\|^2\big] = $$
+
+$$\frac{1}{2}\big[\|z+u+w+x\|^2 + i\|z+u+i(w+x)\|^2 - \|z+u-(w+x)\|^2 - i\|z+u-i(w+x)\|^2$$
+$$\|z-u+(w-x)\|^2 + i\|z-u+i(w-x)\|^2  - \|z-u-(w-x)\|^2  - i\|z-u - i(w-x)\|^2\big] = $$
+
+$$2[\langle z+u,w+x \rangle + \langle z-u,w-x \rangle]\,.$$
+
+Thus, we have shown that 
+
+$$\langle z,w \rangle + \langle u,x \rangle=\frac{1}{2}[\langle z+u,w+x \rangle + \langle z-u,w-x \rangle]$$
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%END Summation%%%%%%%%%%%%%%%%%
+
+Now we will prove the linearity of addition with respect to the inner product.
+
+%%%%%%%%%%%%%%%%%%%%%%Linearity Addition%%%%%%%%%%%%
+
+\begin{description}
+
+\item \textbf{Linearity of Addition.} For all $z,w,u \in V$ 
+
+$$\langle z + u,w \rangle = \langle z,w \rangle + \langle u,w \rangle\,.$$
+
+\begin{proof} In order to prove this property we first require an initial result with regards to the linearity of scalar multiplication. In particular, we show that 
+
+$$\langle 2z,w \rangle = 2\langle z,w \rangle \text{ for all } z,w \in V\,.$$ 
+
+Observe that by the summation property
+	
+	$$\langle z,w \rangle + \langle z,0 \rangle = \frac{1}{2} \big[ \langle 2z, w\rangle + \langle 0,w \rangle \big]\,.$$
+	
+	By the zero identity, it follows that
+	
+	$$\langle z,w \rangle = \frac{1}{2}  \langle 2z, w\rangle$$
+	
+	which in turn implies that
+	
+	$$2\langle z,w \rangle = \langle 2z, w\rangle\,.$$
+
+A symmetric  argument argument shows that $2\langle z,w \rangle = \langle z,2w \rangle$ for all $z,w \in V$. 
+
+We can now prove the linearity of addition. Observe that using the summation property we have
+
+$$\langle z,w \rangle + \langle u,w \rangle = \frac{1}{2}\big[ \langle z+u, 2w \rangle + \langle z-u,0 \rangle \big] = \frac{1}{2}\langle z+u,2w \rangle = \langle z+u,w \rangle\,.$$
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%END Addition%%%%%%%%%%%%%%%%%%
+
+We can now begin the process of proving the linearity of scalar multiples with respect to the inner product in general. We start by showing that this property holds for all integers.
+
+%%%%%%%%%%%%%%%%%%%Integers%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item \textbf{Integer Linearity.} For all $n \in \mathbb{Z}$ and $z,w \in V$
+
+$$\langle nz,w \rangle = n\langle z,w \rangle$$
+
+\begin{proof} We begin by proving, through induction, that the result holds for all positive integers. 
+
+	%%%%%%%%%Induction%%%%%%
+	
+\begin{description}
+
+	\item \textbf{Basis Step.} We have already shown that the result holds for $n=2$ in the proof for the summation property.
+	
+	\item \textbf{Induction Step.} Assume that for $n \in \mathbb{N}$, we have
+	
+	$$\langle nz,w \rangle = n\langle z,w \rangle\,.$$ 
+	We will show that the same result holds for $n+1$. Observe that
+	
+	$$\langle (n+1)z,w \rangle = \langle nz+z,w \rangle = \langle nz,w \rangle + \langle z,w \rangle = n\langle z,w \rangle + \langle z,w \rangle = (n+1)\langle z,w \rangle\,.$$
+	
+	Hence, by induction on $n$, the result holds for all $n \in \mathbb{N}$.
+	
+\end{description}
+
+	%%%%%%%%%End%%%%%%%%%%%%
+	
+As the final step we show that linearity holds for $n = -1$ which gives us all of the negative integers. Again using the summation property we note that
+
+$$\langle z ,w \rangle + \langle -z,w \rangle = \frac{1}{2}\big[\langle z-z,2w \rangle + \langle 2z,w-w \rangle\big] = \frac{1}{2}\big[\langle 0,2w \rangle + \langle 2z,0 \rangle\big] = 0\,.$$
+
+Thus, it follows that $\langle -z,w \rangle = -\langle z,w \rangle$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%END Integers%%%%%%%%%%%%%%%%%%%%%
+
+Next we show that multiplication by rational scalars is linear with respect to the inner product. 
+
+%%%%%%%%%%%%%%%%%%%Rationals%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item \textbf{Rational Linearity.} For all $s \in \mathbb{Q}$ and $z,w \in V$
+
+$$\langle sz,w \rangle = s\langle z,w \rangle\,.$$
+
+\begin{proof} First note that since $s \in \mathbb{Q}$, there exist integers $n,m$ such that $s = n/m$. We then observe that
+
+$$\langle nm^{-1}z,w \rangle - nm^{-1}\langle z,w \rangle = nm^{-1}\big[mn^{-1}\langle nm^{-1}z,w \rangle - \langle z,w \rangle \big] =$$
+$$ nm^{-1}\big[n^{-1}n\langle mm^{-1}z,w \rangle - \langle z,w \rangle \big] = nm^{-1}\big[\langle z,w \rangle - \langle z,w \rangle \big] = 0\,.$$
+
+From this it follows directly that 
+
+$$\langle nm^{-1}z,w \rangle = nm^{-1}\langle z,w \rangle\,.$$
+
+Thus the linearity proper holds for rational scalars as well.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%END Rationals%%%%%%%%%%%%%%%%%%%%
+
+The final step for the linearity property is to extend the result to real numbers and then to complex numbers.
+
+%%%%%%%%%%%%%%%%%%%Linearity Reals%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item \textbf{Real Linearity.} For all $r \in \mathbb{R}$ and $z,w \in V$
+
+$$\langle rz,w \rangle = r\langle z,w \rangle\,.$$
+
+\begin{proof} Since $\mathbb{R}$ is the completion of $\mathbb{Q}$, for every $r \in \mathbb{R}$ there exists a sequence of rational numbers $\lbrace s_n \rbrace$ that converges to $r$ as $n \rightarrow \infty$. It follows from the linearity for rational numbers that for all $N \in \mathbb{N}$ and $z,w \in V$
+
+$$\langle s_Nz,w \rangle = s_N\langle z,w \rangle\,.$$
+
+We can expand this equality using the polarization identity as follows
+
+$$4\langle s_Nz,w \rangle = \|s_Nz+w\|^2 + i\|s_Nz+iw\|^2 - \|s_Nz-w\|^2 - i\|s_Nz-iw\|^2 = $$
+$$s_N\|z+w\|^2 + is_N\|z+iw\|^2 - s_N\|z-w\|^2 - is_N\|z-iw\|^2 = 4s_N\langle z,w \rangle\,.$$
+
+If we then take the limit as $N \rightarrow \infty$ of the left side we observe that
+
+$$\lim\limits_{N \rightarrow \infty}\Big[\|s_Nz+w\|^2 + i\|s_Nz+iw\|^2 - \|s_Nz-w\|^2 - i\|s_Nz-iw\|^2 \Big] = $$
+$$\lim\limits_{N \rightarrow \infty}\|s_Nz+w\|^2 + \lim\limits_{N \rightarrow \infty}i\|s_Nz+iw\|^2 - \lim\limits_{N \rightarrow \infty}\|s_Nz-w\|^2 - \lim\limits_{N \rightarrow \infty}i\|s_Nz-iw\|^2\,. $$
+
+Since the norm is continuous it follows that
+
+$$\lim\limits_{N \rightarrow \infty}\|s_Nz+w\|^2 + \lim\limits_{N \rightarrow \infty}i\|s_Nz+iw\|^2 - \lim\limits_{N \rightarrow \infty}\|s_Nz-w\|^2 - \lim\limits_{N \rightarrow \infty}i\|s_Nz-iw\|^2 = $$
+$$\|rz+w\|^2 + i\|rz+iw\|^2 - \|rz-w\|^2 - i\|rz-iw\|^2 = \langle rz,w \rangle\,. $$
+
+Now considering the right side of our original equality we see that
+
+$$\lim\limits_{N \rightarrow \infty}\Big[s_N\|z+w\|^2 + is_N\|z+iw\|^2 - s_N\|z-w\|^2 - is_N\|z-iw\|^2 \Big] =$$
+$$\lim\limits_{N \rightarrow \infty}s_N\|z+w\|^2 + \lim\limits_{N \rightarrow \infty} is_N\|z+iw\|^2 -\lim\limits_{N \rightarrow \infty} s_N\|z-w\|^2 - \lim\limits_{N \rightarrow \infty}is_N\|z-iw\|^2 =$$
+$$r\|z+w\|^2 + ir\|z+iw\|^2 - r\|z-w\|^2 - ir\|z-iw\|^2 = r\langle z,w \rangle\,.$$
+
+Consequently, we see that $\langle rz,w \rangle = r\langle z,w \rangle$ for all $r \in \mathbb{R}$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%END Reals%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%Complex Linearity%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item\textbf{Complex Linearity.} For all $c \in \mathbb{C}$ and $z,w \in V$
+
+$$\langle cz,w \rangle = c\langle z,w \rangle\,.$$
+
+\begin{proof} Since an arbitrary complex number $c$ is equal to $a+ib$ for $a,b \in \mathbb{R}$, it suffices to show that the property linearity holds for $i$ since we have already established this property for real numbers. Observe that
+
+$$i4\langle z,w \rangle = i\|z+w\|^2 -\|z+iw\|^2 - i\|z-w\|^2 + \|z-iw\|^2 =$$
+$$ i|i|\|z+w\|^2 -|i|\|z+iw\|^2 - i|i|\|z-w\|^2 + |i|\|z-iw\|^2 = $$
+$$i\|iz+iw\|^2 -\|iz-w\|^2 - i\|iz-iw\|^2 + \|iz+w\|^2 = $$
+$$\|iz+w\|^2 + i\|iz+iw\|^2 -\|iz-w\|^2 - i\|iz-iw\|^2 = 4\langle iz,w \rangle\,.$$
+
+Hence, linearity holds for $i$ and thus for all $c \in \mathbb{C}$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%END Complex%%%%%%%%%%%%%%%%%%%%%%
+
+This concludes the proof for the linearity of the function $\langle \cdot,\cdot \rangle$. All the remains now is to prove the Hermitian symmetry and positive definiteness properties.
+
+%%%%%%%%%%%%%%%%%%Symmetry%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item\textbf{Hermitian Symmetry.} For all $z,w \in V$
+
+$$\langle z,w \rangle = \overline{\langle w,z \rangle}\,.$$
+
+\begin{proof} Observe that
+
+$$4\overline{\langle w,z \rangle} = \br{\|w+z\|^2} +\br{i\|w+iz\|^2} - \br{\|w-z\|^2} - \br{i\|w-iz\|^2} = $$
+$$\|z+w\|^2 - i\|w+iz\|^2 - \|w-z\|^2 + i\|w-iz\|^2 = $$
+$$\|z+w\|^2 - i|i|\|w+iz\|^2 - \|z-w\|^2 + i|i|\|w-iz\|^2 = $$
+$$\|z+w\|^2 - i\|-z+iw\|^2 - \|z-w\|^2 + i\|z+iw\|^2  = $$
+$$\|z+w\|^2 + i\|z+iw\|^2 - \|z-w\|^2 - i\|z-iw\|^2 = 4\langle z,w \rangle\,.$$
+
+Consequently, the Hermitian symmetry property holds for all $z,w \in V$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%END Symmetry%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Positive Def%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+\item\textbf{Positive Definiteness.} For all $0 \neq u \in V$
+
+$$\langle u,u \rangle > 0\,.$$
+
+\begin{proof} Again we use the polarization identity to prove this property. Observe that
+
+$$4\langle u,u \rangle = \|2u\|^2 + i\|u+iu\|^2 - \|0\|^2 -i\|u-iu\|^2 = $$
+$$4\|u\|^2 + i\|(1+i)u\|^2 -i\|(1-i)u\|^2 = 4\|u\|^2 + i|1+i|\|u\|^2 -i|1-i|\|u\|^2 =$$
+$$ 4\|u\|^2 + i\|(1+i)u\|^2 -i\|(1-i)u\|^2 = 4\|u\|^2 + i2\|u\|^2 -i2\|u\|^2 = 4\|u\|^2\,.$$
+
+We note that $\|u\|^2 > 0$ unless $u = 0$, hence the positive definiteness property holds for all $0 \neq u \in V$.
+
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%%END Pos Def%%%%%%%%%%%%%%%%%%%%%%%
+
+To summarize, we have shown that the function $\langle \cdot, \cdot \rangle : V \times V \rightarrow \mathbb{C}$ satisfies all of the necessary properties to define an inner product on the vector space $V$.
+
+%%%%%%%%%%%%%%%
+ 
+\end{proof}
+
+\end{description}
+
+%%%%%%%%%%%%%%%%%END Proof%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%We first prove the case for $n = 2$. Observe that by the summation property
+	
+%	$$\langle z,w \rangle + \langle z,0 \rangle = \frac{1}{2} \big[ \langle 2z, w\rangle + \langle 0,w \rangle \big]\,.$$
+	
+%	By the zero identity, it follows that
+	
+%	$$\langle z,w \rangle = \frac{1}{2}  \langle 2z, w\rangle$$
+	
+%	which in turn implies that
+	
+%	$$2\langle z,w \rangle = \langle 2z, w\rangle\,.$$
+
+\end{document} 

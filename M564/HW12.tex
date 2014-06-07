@@ -1,0 +1,326 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 12}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 2.31}
+
+\item \textbf{Proposition.} $\sum_{n=1}^{\infty}\frac{1}{n^2} = \frac{\pi^2}{6}$.
+
+\item \begin{proof}	We start by computing the Fourier series of $f(x) = (\pi-x)^2$ on $(0,2\pi)$. Observe that for $n \neq 0$
+
+$$\hat{f}(n) = \frac{1}{2\pi}\int_0^{2\pi}(x-\pi)^2e^{-inx}dx\,.$$
+
+We can then make the following change of variable $y = x-\pi$. Then
+
+$$\frac{1}{2\pi}\int_\pi^{\pi}y^2e^{-iny}e^{-in\pi}dy = \frac{(-1)^n}{2\pi}\int_\pi^{\pi}y^2e^{-iny}dy\,.$$
+
+Then using integration by parts twice we have
+
+$$\frac{(-1)^n}{2\pi}\int_\pi^{\pi}y^2e^{-iny}dy = \frac{-1^n}{2\pi}\left(\frac{-1}{in}y^2e^{-iny}\Big|_{-\pi}^\pi + \frac{2}{in}\int_{-\pi}^\pi ye^{-iny}dy\right) = \frac{-1^n}{2\pi}\left(\frac{2}{in}\int_{-\pi}^\pi ye^{-iny}dy\right) = $$
+
+$$\frac{-1^n}{2\pi}\frac{2}{in}\left(\frac{-1}{in}ye^{-iny}\Big|_{-\pi}^\pi + \frac{1}{in}\int_{-\pi}^\pi e^{-iny}dy\right) = $$
+
+$$\frac{-1^n}{2\pi}\frac{2}{n^2}\left(\pi(-1)^n + \pi(-1)^n\right) = \frac{-1^n}{2\pi}\frac{4\pi(-1)^n}{n^2} = \frac{2}{n^2}\,.$$
+
+For $n = 0$ we have
+
+$$\hat{f}(0) = \frac{1}{2\pi}\int_0^{2\pi}(x-\pi)^2e^{-i0x}dx = \frac{1}{2\pi}\int_0^{2\pi}(x-\pi)^2dx = \frac{1}{2\pi}\int_{-\pi}^{\pi}y^2dy = \frac{1}{2\pi}\left(\frac{\pi^3}{3} + \frac{\pi^3}{3}\right) = \frac{\pi^2}{3}\,.$$
+
+Hence, it follows that
+
+$$f(x) = \sum_\infty^\infty c_ne^{inx} = \frac{\pi^2}{3} + \sum_{n\neq 0}\frac{2}{n^2}e^{inx}\,.$$
+
+Next, note that $f(0) = \pi^2$. Therefore,
+
+$$\pi^2 = \frac{\pi^2}{3} + 2\sum_{n=1}^\infty\frac{2}{n^2} = \frac{\pi^2}{3} + 4\sum_{n=1}^\infty\frac{1}{n^2}\,.$$
+
+Solving for $\sum_{n=1}^\infty\frac{1}{n^2}$ we conclude that
+
+$$\sum_{n=1}^\infty\frac{1}{n^2} = \frac{\pi^2}{6}\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 2.32}
+
+\item \textbf{Proposition.} $\sum_{n=1}^{\infty}\frac{1}{n^2} = \frac{-\pi^2}{12}$.
+
+\item \begin{proof}	We start by computing the Fourier series of $f(x) = x^2$ on $(-\pi,\pi)$. Observe that for $n \neq 0$
+
+$$\hat{f}(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi}x^2e^{-inx}dx\,.$$
+
+Then using integration by parts twice we have
+
+$$\frac{1}{2\pi}\int_\pi^{\pi}x^2e^{-inx}dx = \frac{1}{2\pi}\left(\frac{-1}{in}x^2e^{-inx}\Big|_{-\pi}^\pi + \frac{2}{in}\int_{-\pi}^\pi xe^{-inx}dx\right) = \frac{1}{2\pi}\left(\frac{2}{in}\int_{-\pi}^\pi x^{-inx}dx\right) = $$
+
+$$\frac{1}{2\pi}\frac{2}{in}\left(\frac{-1}{in}xe^{-inx}\Big|_{-\pi}^\pi + \frac{1}{in}\int_{-\pi}^\pi e^{-inx}dx\right) = $$
+
+$$\frac{1}{2\pi}\frac{2}{n^2}\left(\pi(-1)^n + \pi(-1)^n\right) = \frac{1}{2\pi}\frac{4\pi(-1)^n}{n^2} = \frac{2(-1)^n}{n^2}\,.$$
+
+For $n = 0$ we have
+
+$$\hat{f}(0) = \frac{1}{2\pi}\int_0^{2\pi}x^2e^{-i0x}dx = \frac{1}{2\pi}\int_0^{2\pi}x^2dx = \frac{1}{2\pi}\left(\frac{\pi^3}{3} + \frac{\pi^3}{3}\right) = \frac{\pi^2}{3}\,.$$
+
+Hence, it follows that
+
+$$f(x) = \sum_\infty^\infty c_ne^{inx} = \frac{\pi^2}{3} + \sum_{n\neq 0}\frac{2(-1)^n}{n^2}e^{inx}\,.$$
+
+Next, note that $f(0) = 0$. Therefore,
+
+$$0 = \frac{\pi^2}{3} + 2\sum_{n=1}^\infty\frac{2(-1)^n}{n^2} = \frac{\pi^2}{3} + 4\sum_{n=1}^\infty\frac{(-1)^n}{n^2}\,.$$
+
+Solving for $\sum_{n=1}^\infty\frac{1}{n^2}$ we conclude that
+
+$$\sum_{n=1}^\infty\frac{(-1)^n}{n^2} = \frac{-\pi^2}{12}\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 2.33}
+
+\item \textbf{Proposition.} Given $\epsilon >0$, there exists a $C_\epsilon > 0$ such that
+
+$$|\langle x,y \rangle| \leq \epsilon \|x\|^2 + C_\epsilon\|y\|^2\,.$$
+
+\item \begin{proof} By the Cauchy-Schwartz inequality we have
+
+$$|\langle x,y \rangle| \leq \|x\|\|y\| = \frac{\sqrt{2\epsilon}}{\sqrt{2\epsilon}}\|x\|\|y\| = \|\sqrt{2\epsilon}x\|\|\frac{1}{\sqrt{2\epsilon}}y\|\,.$$
+
+Then applying the AGM inequality we conclude that
+
+$$\|\sqrt{2\epsilon}x\|\|\frac{1}{\sqrt{2\epsilon}}y\| \leq \frac{\|\sqrt{2\epsilon}x\|^2+\|\frac{1}{\sqrt{2\epsilon}}y\|^2}{2} = \epsilon\|x\|^2+\frac{1}{4\epsilon}\|y\|^2\,.$$
+
+Thus, we have
+
+$$|\langle x,y \rangle| \leq \epsilon\|x\|^2+\frac{1}{4\epsilon}\|y\|^2\,,$$
+
+which is the desired result with $C_\epsilon = \frac{1}{4\epsilon}$.
+
+\end{proof}
+
+\item \textbf{Exercise 2.34}
+
+\item \textbf{Proposition.} Second inequality from 2.9.
+
+\item \begin{proof} First assume that 
+
+$$\|Lf\|^2 \leq \epsilon\|f\|^2 + \|T_\epsilon f\|^2\,,$$
+
+for $\epsilon >0$ and $T_\epsilon$ a compact operator. Then observe that
+
+$$\epsilon\|f\|^2 + \|T_\epsilon f\|^2 \leq \epsilon\|f\|^2 + \|T_\epsilon f\|^2 + 2\sqrt{\epsilon}\|f\|\|T_\epsilon f \| = \left(\sqrt{\epsilon}\|f\| + \|T_\epsilon f\|\right)^2\,.$$
+
+By taking square roots it then follows that
+
+$$\|Lf\| \leq \sqrt{\epsilon}\|f\| + \|T_\epsilon f\|\,.$$
+
+By the first inequality in Proposition 2.9, it follows that $L$ must be compact.
+
+Next assume that $L$ is compact. Then for $\epsilon > 0$ there exists some compact operator $K_\epsilon$ such that 
+
+$$\|Lf\| \leq \epsilon\|f\| + \|K_\epsilon f\|\,.$$
+
+Observe then that
+
+$$\|Lf\|^2 \leq \left(\epsilon\|f\| + \|K_\epsilon f\|\right)^2 = \epsilon^2\|f\|^2 + 2\epsilon
+\|f\|\|K_\epsilon f\| + \|K_\epsilon f\|^2 \leq \,.$$ 
+
+$$\epsilon^2\|f\|^2 + \epsilon^2\|f\|^2 + \|K_\epsilon f\|^2 + \|K_\epsilon f\|^2 = 2\epsilon^2\|f\|^2 + \|\sqrt{2}K_\epsilon f\|^2\,.$$
+
+Hence, we have found the desired inequality to prove the result
+
+$$\|Lf\|^2 \leq 2\epsilon^2\|f\|^2 + \|\sqrt{2}K_\epsilon f\|^2\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 2.35}
+
+\item \textbf{Proposition.} Assume $L \in \mathcal{L}(\mathcal{H})$. Then if $L$ is compact, $L^*$ is as well. Furthermore, $L$ is compact if and only if $L^*L$ is compact.
+
+\item \begin{proof} First suppose that $L$ is compact. Then $LL^*$ is compact as well, by Proposition 2.10. Now observe that
+
+$$\|L^*f\| = |\langle L^*f,L^*f \rangle| = |\langle f,LL^*f\rangle|\,.$$
+
+Then given an $\epsilon > 0$, by exercise 2.33, it follows that
+
+$$|\langle f,LL^*f\rangle| \leq \epsilon\|f\|^2 + \frac{1}{4\epsilon} \|LL^*f\|^2 = \epsilon\|f\|^2 +  \|\frac{1}{2\sqrt{\epsilon}}LL^*f\|^2\,.$$
+
+Since $LL^*$ is compact, it follows by Proposition 2.9 that $L^*$ is compact as well.
+
+First assume that $L^*L$ is compact. Observe that
+
+$$\|Lf\| = |\langle Lf,Lf \rangle| = |\langle f,L^*Lf\rangle|\,.$$
+
+Then given an $\epsilon > 0$, by exercise 2.33, it follows that
+
+$$|\langle f,L^*Lf\rangle| \leq \epsilon\|f\|^2 + \frac{1}{4\epsilon} \|L^*Lf\|^2 = \epsilon\|f\|^2 +  \|\frac{1}{2\sqrt{\epsilon}}L^*Lf\|^2\,.$$
+
+For this we can conclude that since $L^*L$ is compact, $L$ must be compact by Proposition 2.9.
+
+\end{proof}
+
+\item \textbf{Exercise 3.2}
+
+\item \textbf{Proposition.} Proposition 3.1 and 3.2 from the book.
+
+\item \begin{proof} Let $f,g \in \mathcal{S}.$
+
+	\begin{description}
+	
+		\item \textbf{$\mathcal{S}$ is closed under differentiation.}
+		
+		Since $f \in \mathcal{S}$ is follows that for all $0 \leq a,b \in \mathbb{Z}$
+		
+		$$\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bf(x) = 0\,.$$
+	
+If we let $h(x) = \frac{d}{dx}f(x)$, then since $0 \leq b+1 \in \mathbb{Z}$ we can conclude that
+
+		$$\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bh(x) = 		\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^{b+1}f(x) = 0\,.$$
+		
+		Hence, $h(x) \in \mathcal{S}$ and $\mathcal{S}$ is closed under differentiation.
+	
+	\item \textbf{$\mathcal{S}$ is closed under multiplication.}
+	
+	Since $f,g \in \mathcal{S}$ is follows that for all $0 \leq a,b \in \mathbb{Z}$
+		
+		$$\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bf(x) = 0\,.$$
+	
+$$\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bg(x) = 0\,,$$	
+
+and in particular
+
+$$\lim\limits_{|x|\rightarrow \infty}g(x) = 0\,.$$
+
+Then since $f$ and $g$ are infinity differentiable we see that for all $0 \leq a,b\in \mathbb{Z}$
+
+$$0 = 0 \cdot 0 = \left(\lim\limits_{|x|\rightarrow \infty}g(x)\right)\left(\lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bf(x)\right) = \lim\limits_{|x|\rightarrow \infty}|x|^a\left( \frac{d}{dx} \right)^bf(x)g(x)\,.$$
+	
+Thus, we see that $f(x)g(x) \in \mathcal{S}$ and $\mathcal{S}$ is closed under multiplication.
+	
+	\item \textbf{$\mathcal{F}$ is linear.}
+	
+		Observe that 
+		$$\mathcal{F}(\alpha f + \beta g)(\xi) = \frac{1}{\sqrt{2\pi}}\int [\alpha f(x) + \beta g(x)]e^{-ix\xi}dx =$$
+		
+		$$ \frac{1}{\sqrt{2\pi}}\int \alpha f(x) e^{-ix\xi}dx + \frac{1}{\sqrt{2\pi}}\int \beta g(x)e^{-ix\xi}dx = $$
+		
+		$$\alpha \frac{1}{\sqrt{2\pi}}\int f(x) e^{-ix\xi}dx + \beta\frac{1}{\sqrt{2\pi}}\int g(x)e^{-ix\xi}dx = \alpha\mathcal{F}( f(\xi)+\beta\mathcal{F}( g)(\xi)\,.$$
+		
+		Thus, $\mathcal{F}$ is linear.
+		
+	\item \textbf{Bounded : $\|\hat{f}\|_{L^\infty} \leq \frac{1}{\sqrt{2\pi}}\|f\|_L^1$.}
+	
+	Observe that 
+	$$|\mathcal{F}(f)(\xi)| = |\frac{1}{\sqrt{2\pi}}\int f(x)e^{-ix\xi}dx| \leq \frac{1}{\sqrt{2\pi}}\int |f(x)e^{-ix\xi}|dx =$$
+	
+	$$ \frac{1}{\sqrt{2\pi}}\int |f(x)|dx = \frac{1}{\sqrt{2\pi}}\|f\|_{L^1}\,.$$
+	
+	\item \textbf{Conjugate : $\hat{\br{f}}(\xi) = \overline{\hat{f}(-\xi)}$}
+	
+	Observe that 
+	
+	$$\hat{\br{f}}(\xi) = \frac{1}{\sqrt{2\pi}}\int \br{f}(x)e^{-ix\xi}dx = \frac{1}{\sqrt{2\pi}}\int \br{f(x)e^{ix\xi}}dx = $$
+	
+	$$\br{\frac{1}{\sqrt{2\pi}}\int f(x)e^{ix\xi}dx} = \overline{\hat{f}(-\xi)}\,.$$	
+	
+	\item \textbf{If $f_h(x) = f(x+h)$, then
+	 $\hat{f}_h(\xi) = e^{ih\xi}\hat{f}(\xi)$.}	
+
+	Note that
+	
+		$$\hat{f}_h(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)_he^{-ix\xi}dx = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x+h)e^{-ix\xi}dx\,.$$
+		
+		If we then make the change of variable for $y = x+h$ we obtain
+		
+$$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x+h)e^{-ix\xi}dx = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-i(y-h)\xi}dx = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-iy\xi}e^{ih\xi}dx = $$
+
+$$e^{ih\xi}\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-iy\xi}dx = e^{ih\xi}\hat{f}(\xi)\,.$$
+
+\item \textbf{The following identities hold: $D_{i\xi}\mathcal{F} = \mathcal{F}M_{x}$ and $\mathcal{F}D_x = M_{i\xi}\mathcal{F}$.}
+
+First observe that 
+
+$$D_{i\xi}\mathcal{F} = \frac{d}{d\xi}\hat{f}(\xi) = \frac{d}{d\xi}\frac{1}{\sqrt{2\pi}}\int f(x)e^{-ix\xi}dx = \frac{1}{\sqrt{2\pi}}\int f(x)(-ix)e^{-ix\xi}dx = $$
+
+$$-i\mathcal{F}(M_xf)\,.$$
+
+Next we note that
+
+$$\hat{f}^\prime(\xi) = \frac{1}{\sqrt{2\pi}}\int f(x)^\prime e^{-ix\xi}dx = \frac{1}{\sqrt{2\pi}}\left[f(x)e^{-ix\xi}\Big|_{-\infty}^\infty + i\xi \int f(x) e^{-ix\xi}dx\right]\,.$$ 
+
+Since $f \in \mathcal{S}$ it follows that the first part of the sum goes to zero. Hence
+
+$$\frac{1}{\sqrt{2\pi}}\left[f(x)e^{-ix\xi}\Big|_{-\infty}^\infty + i\xi \int f(x) e^{-ix\xi}dx\right] = \frac{1}{\sqrt{2\pi}}i\xi \int f(x) e^{-ix\xi}dx = i\xi\hat{f}(\xi)\,.$$
+	
+	\end{description}
+
+\end{proof}
+
+\end{description}
+
+\end{document} 

@@ -1,0 +1,233 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newcommand {\pro} {\textbf{Proposition. }}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Homework 1}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.2}
+
+	\begin{description}
+	
+	\item\pro The infinite series $\sum \limits_{n=2}^\infty \frac{\sin(nx)}{\log(n)}$	converges.
+	
+	\begin{proof} We will use Corollary 1.1 to show that the series converges. First we will re-index the series to start at $n=1$,
+
+	$$\sum \limits_{n=2}^\infty \frac{\sin(nx)}{\log(n)} = \sum \limits_{n=1}^\infty \frac{\sin[(n+1)x]}{\log(n+1)}\,.$$
+	
+	 Then set $a_n = 1/\log(n)$ and $b_n = \sin[(n+1)x]$. Observe that $a_n \rightarrow 0$ as $n \rightarrow \infty$. Next consider the series $\sum |a_{n+1} - a_n|$. Note that $a_{n+1} < a_n$ for all $n \in \mathbb{N}$, thus 
+	 $$\sum_{n=1}^N \Big|\frac{1}{\log(n+2)} - \frac{1}{\log(n+1)} \Big| = \sum_{n=1}^N\frac{1}{\log(n+1)} - \frac{1}{\log(n+2)} =$$
+	 
+	 $$ \frac{1}{\log(2)} - \frac{1}{\log(3)} + \frac{1}{\log(3)} - \frac{1}{\log(4)} + \m\m\m - \frac{1}{\log(N+1)} + \frac{1}{\log(N+1)} - \frac{1}{\log(N+2)} = $$
+	 
+	 $$\frac{1}{\log(2)} - \frac{1}{N+2}\,.$$
+	 
+	 Note that as $N \rightarrow \infty$, $1/\log(N+2) \rightarrow 0$ and the above series converges to $1/\log(2)$.
+	 
+	 As the final step, we show that the partial sums of $\sum_{n = 1}^N b_n$ (which we denote as $B_N$) are bounded. Recall the following identity
+	 
+	 $$\sin[(n+1)x] = \frac{e^{i(n+1)x}-e^{-i(n+1)x}}{2i}\,.$$
+
+	From this it follows that
+	
+	$$\sum_{n = 1}^N \sin[(n+1)x] = \sum_{n = 1}^N \frac{e^{i(n+1)x}-e^{-i(n+1)x}}{2i} = \frac{1}{2i}\Big[\sum_{n = 1}^N e^{i(n+1)x}- \sum_{n = 1}^N e^{-i(n+1)x}\Big]$$
+	
+	Consider the term $\sum_{n = 1}^N e^{i(n+1)x}$. We note that since $e^{ix} \neq 1$, this is a finite geometric series. Hence we have
+	
+	$$\sum_{n = 1}^N e^{i(n+1)x} = e^{ix}\frac{1-e^{i(N+1)x}}{1-e^{ix}}\,.$$ 	
+	
+	Observe that 
+	
+	$$\Big| e^{ix}\frac{1-e^{i(N+1)x}}{1-e^{ix}} \Big| \leq \frac{|1-e^{i(N+1)x}|}{|1-e^{ix}|} \leq \frac{2}{|1-e^{ix}|}\,.$$
+	
+	Note that the right most term in this inequality is not dependant on $N$ and thus $\sum_{n = 1}^N e^{i(n+1)x}$ is bounded. Similarly, $-\sum_{n = 1}^N e^{-i(n+1)x}$ is also bounded and therefore the partial sums $B_N$, are bounded. Consequently, by Corollary 1.1, $\sum \limits_{n=2}^\infty \frac{\sin(nx)}{\log(n)}$ must converge.
+	
+	\end{proof}
+	
+	\item\pro For $\alpha > 0$, the infinite series $\sum \limits_{n=1}^\infty \frac{\sin(nx)}{n^{\alpha}}$	converges.
+	
+	\begin{proof} Again we use Corollary 1.1 to prove convergence. Note that if we again set $b_n = \sin(nx)$, then the partial sums $B_N$ are bounded (as shown in the text).
+	
+Next we set $a_n = 1/n^\alpha$. Since $\alpha >0$ it is clear that $a_n \rightarrow 0$ as $n \rightarrow \infty$. As a final step, consider the series $\sum |a_{n+1} - a_n|$. We note that $1/n^\alpha > 1/n^\alpha$ for all $n \in \mathbb{N}$. It follows that
+
+	$$\Big| \sum_{n=1}^N \frac{1}{(n+1)^{\alpha}} - \frac{1}{n^\alpha} \Big| = \sum_{n=1}^N \frac{1}{n^{\alpha}} - \frac{1}{(n+1)^\alpha}\,,$$
+
+which is a telescopic series and therefore converges as $N \rightarrow \infty$. Thus, by Corollary 1.1 $\sum \limits_{n=1}^\infty \frac{\sin(nx)}{n^{\alpha}}$	converges.
+	
+	\end{proof}		
+	
+	\end{description}
+
+\item \textbf{Exercise 1.4}
+
+\pro Let $w$ be a primitive third root of unity. Then $\sum \limits_{n=1}^\infty \frac{w^{n-1}}{n^{1/3}}$ converges, but $\sum \limits_{n=1}^\infty \Big(\frac{w^{n-1}}{n^{1/3}}\Big)^{3} = \sum \limits_{n=1}^\infty \frac{1}{n}$, which diverges.
+
+	\begin{proof} We use Corollary 1.1 in order to prove our hypothesis. Set $a_n = 1/n^{1/3}$. It is clear that $a_n \rightarrow 0$ as $n \rightarrow \infty$. Considering the series $\sum |a_{n+1} - a_n|$, we note that it can be rewritten as 
+	
+	$$\sum_{n=1}^N \frac{1}{(n)^{1/3}} - \frac{1}{(n+1)^{1/3}}\,.$$
+	
+	This is a telescopic series and since $a_n \rightarrow 0$, this series must converge.
+	
+	Next we set $b_n = w^{n-1}$ and consider the partial sums given by $\sum_{n=0}^{N-1} w^n$. Since $w \neq 1$, each of these partial sums is a finite geometric series. In particular, we note that for any $N = 3k$ where $k \in \mathbb{Z}$ we have
+	
+	$$\sum_{n=0}^{N-1} w^n = \frac{1-w^N}{1-w} = \frac{1-{(w^3)}^k}{1-w} = 0\,.$$
+	
+	Thus, we see that every third partial sum is zero and therefore the partial sums of the $b_n$ terms must be bounded. Consequently, by Corollary 1.1, $\sum \limits_{n=1}^\infty \frac{w^{n-1}}{n^{1/3}}$ converges.
+	
+	\end{proof}
+
+\item \textbf{Exercise 1.5} 
+
+\pro Cauchy sequences of complex numbers converge if and only if, whenever a series $\sum |a_n|$ converges, then $\sum a_n$ converges as well.
+
+\begin{proof} First we assume the convergence of Cauchy sequences. We will show that this implies that absolutely convergent series conditionally converge as well. Let ${a_n}$ be a sequence of complex numbers such that $\sum_{n=1}^\infty |a_n|$ converges. This implies that the sequence of partial sums of $\sum_{n=1}^\infty |a_n|$ (we denote the $N^th$ partial sum as $|A|_N$) converges and therefore must be a Cauchy sequence. In particular, this implies that given $\epsilon > 0$, there exists some $N$ such that for $K,M \geq N$ (without lose of generality we can assume that $K > M$) 
+
+	$$||A|_K - |A|_M| < \epsilon\,.$$
+	
+	Observe that 
+	$$\epsilon > ||A|_K - |A|_M| = |A|_K - |A|_M = \sum_{M+1}^K |a_n| \geq |\sum_{M+1}^K a_n| = |A_K +A_M|\,,$$
+	
+	where $A_M$ is the $M^{th}$ partial sum of $\sum_{n=1}^\infty a_n$. Thus, we see that ${A_N}$ is a Cauchy sequence as well and therefore it converges. 
+
+Next assume that if a series converges absolutely then, it converges conditionally. We will show that this implies the convergence of Cauchy sequences. Let ${a_n}$ be a Cauchy sequence of complex numbers. Since ${a_n}$ is Cauchy there exists some $N_1$ such that for $n > N_1$
+
+$$|a_n - a_{N_1}| < \frac{1}{2}\,.$$
+
+Similarly, there exists some $N_2$ such that for $n > N_2$
+
+$$|a_n - a_{N_2}| < \frac{1}{2^2}\,.$$
+
+Proceeding inductively we see that in general We can find a $N_k$ such that for $n > N_k$
+
+$$|a_n - a_{N_k}| < \frac{1}{2^k}\,.$$
+
+Note that we have created an increasing sequence of indices $N_1 < N_2 < ... < N_k$. Thus we can replace some terms in the above inequalities as follows
+
+	$$|a_n - a_{N_k}| < \frac{1}{2^k}$$
+	$$|a_{N_k} - a_{N_{k-1}}| < \frac{1}{2^{k-1}}$$
+	$$\m$$
+	$$\m$$
+	$$\m$$
+	$$|a_{N_2} - a_{N_{1}}| < \frac{1}{2}\,,$$
+	
+	where $n > N_k$. Setting $n = N_{K+1}$ and  combining these inequalities into sums we obtain
+	
+	$$\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}| < \sum_{k=1}^K \frac{1}{2^k}\,.$$
+	
+	Observe that the right-hand side of this inequality is a geometric series that converges as $K \rightarrow \infty$. Therefore the left-hand side must also be a convergent series. By our hypothesis, since $\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}|$ is convergent, it follows that $\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}}$ is convergent as well.  Observe that this series is telescopic and therefore
+	
+	$$\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}} = a_{N_{k+1}} = a_n$$
+	
+	for $n > N_{k}$. Hence, the Cauchy sequence ${a_n}$ is convergent.
+
+\end{proof}
+
+\item \textbf{Exercise 1.7}
+
+\begin{description}
+	\item First we rewrite $f(\theta)$ as follows
+	
+	$$f(\theta) = 1+a\cos(\theta) = \frac{a}{2}e^{-i\theta} + 1 + \frac{a}{2}e^{i\theta}\,.$$
+	
+	Using the Riesz-Fejer Theorem we can derive $q(z)$ to be
+	
+	$$z(\frac{a}{2}z^{-1} + 1 + \frac{a}{2}z) = \frac{a}{2} + z + \frac{a}{2}z^2\,.$$
+	
+	Using the quadratic formula, we see that the roots of this polynomial are
+	
+	$$z = \frac{-1 \pm \sqrt{1-a^2}}{a}\,.$$
+	
+	Setting $\xi = \frac{-1 + \sqrt{1-a^2}}{a}$ we can now factor $q(z)$ as follows
+	
+	$$q(z) = \frac{a}{2}(z - \xi)(z- \bar{\xi}^{-1})\,.$$
+	
+	Recall that on the unit circle $z = 1/\bar{z}$ and consequently
+	
+	$$z- \bar{\xi}^{-1} = \frac{1}{\bar{z}}- \frac{1}{\bar{\xi}} = \frac{\bar{\xi} - \bar{z}}{\bar{z}\bar{\xi}}\,.$$
+	
+	Thus, we see that
+	
+	$$q(z) = \frac{-a}{2\bar{z}\bar{\xi}}(z - \xi)(\bar{z}- \bar{\xi})\,.$$
+
+	Taking the modulus of $q(z)$ we see that
+	
+	$$|q(z)| = \frac{|a|}{2|\bar{\xi}|}(z - \xi)(\bar{z}- \bar{\xi})\,.$$
+	
+	Finally, by the Riesz-Fejer Theorem we know that $|p(z)|^2 = |q(z)|$. Thus
+	
+	$$|p(z)| = \sqrt{|q(z)|} = \sqrt{\frac{|a|}{2|\bar{\xi}|}}|(z - \xi)| = \sqrt{\frac{|a|}{2\frac{|-1 + \sqrt{1-a^2}|}{|a|}}}\m|(z - \frac{-1 + \sqrt{1-a^2}}{a})| = $$
+	
+	$$\sqrt{\frac{a^2}{2|-1 + \sqrt{1-a^2}|}}\m|(z - \frac{-1 + \sqrt{1-a^2}}{a})| = \frac{a}{(2|-1 + \sqrt{1-a^2}|)^{1/2}}\m|(z - \frac{-1 + \sqrt{1-a^2}}{a})|$$
+	
+	
+\end{description}
+
+\end{description}
+
+\end{document} 

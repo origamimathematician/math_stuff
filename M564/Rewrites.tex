@@ -1,0 +1,419 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,vmargin={20mm,20mm},hmargin={20mm,20mm}]{geometry}
+
+\usepackage[pdftex]{graphicx}
+
+\usepackage{amssymb, amsmath, amsthm}
+
+\usepackage{enumitem}
+
+\usepackage{tikz}
+
+\usepackage{tkz-graph}
+
+\newcommand {\C} [1] {{\mathbb C}^{#1}}
+
+\newcommand {\R} [1] {{\mathbb R}^{#1}}
+
+\newcommand {\limit} [2] {\displaystyle{\lim_{{#1}\rightarrow{#2}}}}
+
+\newcommand {\bfrac} [2] {\displaystyle{\frac{#1}{#2}}}
+
+\newcommand {\real} {\mbox{Re}}
+
+\newcommand {\imag} {\mbox{Im}}
+
+\newcommand{\br} [1] {\overline{#1}}
+
+\newcommand{\tab} {\hspace{5mm}}
+
+\newcommand{\mmod} [3] {{#1} \equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\nmod} [3] {{#1} \not\equiv {#2} \hspace{1mm} (\bmod{\hspace{1mm}#3})}
+
+\newcommand{\intm} [1] {\mathbb{Z}_{#1}}
+
+\newcommand {\Z} {\mathbb{Z}}
+
+\newcommand {\threematrix} [9] {\small{\begin{bmatrix}{#1} & {#2} & {#3}\\{#4} & {#5} & {#6}\\{#7} & {#8} & {#9}\\\end{bmatrix}}}
+
+\newcommand {\m} {\cdot}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{cor}[theorem]{Corollary}
+
+\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\begin{flushright}
+{\small{Nathan Sponberg\\}}
+{\small{Math 564}}
+\end{flushright}
+
+\begin{center}
+\bf{Project Proposal}
+\end{center}
+
+\begin{description}
+
+\item \textbf{Exercise 1.13 (Original)}
+
+\item \textbf{Proposition: }The Hermitian symmetric polynomial $R(t,\bar{t}) = a + bt + \bar{b}\bar{t} + c|t|^2$ has a minimum at the point $(-\bar{b}/c,-b/c)$, where $a \in \mathbb{R}$, $b \in \mathbb{C}$ and $c > 0$.
+
+\begin{proof} Set $t = x+iy$ and $b = k + iz$ for $x,y,k,z \in \mathbb{R}$. Then we can rewrite the Hermitian symmetric polynomial in terms of the two real variables $x$ and $y$. Observe that 
+
+$$a + bt + \bar{b}\bar{t} + c|t|^2 = a + (k + iz)(x + iy) + (k-iz)(x-iy) + c(x^2+y^2) = $$
+$$a + kx + izx +iky - zy + kx - izx - iky - zy + cx^2 + cy^2 = $$
+$$a + 2kx - 2zy + cx^2 + cy^2 = a + (cx^2 + 2kx) + (cy^2 - 2zy)\,.$$
+
+Taking the partial derivatives of this polynomial (which we call $f(x,y)$) we see that
+
+$$f_x = 2cx + 2k$$
+and
+$$f_y = 2cy - 2z\,.$$
+
+These derivatives are zero at the points $x = -k/c$
+and $y = z/c$ respectively. Next, we note that $f_{xx} = 2c = f_{yy}$ and $f_{xy} = 0$. Thus, the function $f$, has a minimum at the point $(-k/c,z/c)$. This means that the $R(t,\bar{t})$ has a minimum at the point $(-\bar{b}/c,-b/c)$.
+
+\end{proof}
+
+\item \textbf{Rewrite of Exercise 1.13}
+
+\item \textbf{Proposition: }The Hermitian symmetric polynomial $R(t,\bar{t}) = a + bt + \bar{b}\bar{t} + c|t|^2$ has a minimum at the point $(-\bar{b}/c,-b/c)$, where $a \in \mathbb{R}$, $b \in \mathbb{C}$ and $c > 0$.
+
+\begin{proof} Set $t = x+iy$ and $b = k + iz$ for $x,y,k,z \in \mathbb{R}$. Then we can rewrite the Hermitian symmetric polynomial in terms of the two real variables $x$ and $y$. Observe that 
+
+$$a + bt + \bar{b}\bar{t} + c|t|^2 = a + (k + iz)(x + iy) + (k-iz)(x-iy) + c(x^2+y^2) = $$
+$$a + kx + izx +iky - zy + kx - izx - iky - zy + cx^2 + cy^2 = $$
+$$a + 2kx - 2zy + cx^2 + cy^2 = a + (cx^2 + 2kx) + (cy^2 - 2zy)\,.$$
+
+Taking the partial derivatives of this polynomial (which we call $f(x,y)$) we see that
+
+$$f_x = 2cx + 2k$$
+and
+$$f_y = 2cy - 2z\,.$$
+
+These derivatives are zero at the points $x = -k/c$
+and $y = z/c$ respectively. Next, we note that $f_{xx} = 2c = f_{yy}$ and $f_{xy} = 0$. Thus, the function $f$, has a minimum at the point $(-k/c,z/c)$. This means that the $R(t,\bar{t})$ has a minimum at the point $(-\bar{b}/c,-b/c)$. Evaluating the polynomial at this point we obtain the following minimum
+
+$$R(-\bar{b}/c,-b/c) = a - b\frac{\bar{b}}{c} - \bar{b}\frac{b}{c} + \frac{|b|^2}{c} = a - \frac{|b|^2}{c}\,.$$
+
+We can also compute the minimum by taking partial derivatives of the polynomial with respect to the complex variables $t$ and $\bar{t}$. Observe that this yields the following
+
+$$\frac{\partial R}{\partial t} = b + c\bar{t}$$
+
+and
+
+$$\frac{\partial R}{\partial \bar{t}} = \bar{b} +ct\,.$$
+
+Setting these equal to zero we see that the minimum occurs at the follow values of $t$ and $\bar{t}$
+
+$$\bar{t} = \frac{-b}{c}$$
+
+$$t = \frac{-\bar{b}}{c}\,.$$
+
+This agrees with our prior calculations.
+
+\end{proof}
+
+\item \textbf{Exercise 1.6}
+
+\item \textbf{Proposition.} The series $\sum \limits_{n=0}^\infty\frac{\cos(kx)}{\log(k+2)}$ converges to a non-negative function.
+
+\item\begin{proof} As the first step we will use summation by parts twice on the $N^{th}$ partial sum of the given series. Observe,
+
+$$\sum \limits_{n=0}^N\frac{\cos(kx)}{\log(k+2)} = \frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx) - \sum \limits_{n=0}^{N-1}\left( \frac{1}{\log(n+3)} -\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\cos(kx)\,.$$
+
+Considering the right-hand term of this expression and summing it by parts again we have
+
+$$- \sum \limits_{n=0}^{N-1}\left( \frac{1}{\log(n+3)} -\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\cos(kx) =$$
+
+$$-\left( \frac{1}{\log(N+2)} -\frac{1}{\log(N+1)} \right)\sum \limits_{n=0}^{N-1}\sum \limits_{k=0}^{n}\cos(kx)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\sum \limits_{j=0}^{k}\cos(jx)\,.$$
+
+Thus, the final expression is
+
+$$\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx)-\left( \frac{1}{\log(N+2)} -\frac{1}{\log(N+1)} \right)\sum \limits_{n=0}^{N-1}\sum \limits_{k=0}^{n}\cos(kx)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\sum \limits_{k=0}^{n}\sum \limits_{j=0}^{k}\cos(jx)\,.$$\begin{flushright}
+(*)
+\end{flushright}
+
+Before we consider the limit of this expression we will derive a formula for $\sum_{n=0}^{N}\sum_{k=0}^{n}\cos(kx)$. Consider the following
+
+$$\sum \limits_{n=0}^{N}\sum \limits_{k=0}^{n}\cos(kx) = \sum \limits_{n=0}^{N}\sum \limits_{k=0}^{n}\frac{e^{inx} + e^{-inx}}{2} = \sum \limits_{n=0}^{N}\left(\frac{1}{2}+\frac{1}{2}\sum \limits_{-n}^{n}e^{inx}\right) = \frac{N}{2} + \frac{1}{2}\sum \limits_{n=0}^{N}\sum \limits_{-n}^{n}e^{inx} =$$
+$$\frac{N+1}{2} + \frac{1}{2}\sum \limits_{n=1}^{N}\sum \limits_{-n}^{n}e^{inx}\,.$$
+
+By the formula calculated in exercise 1.44 we observe that
+
+$$\frac{N+1}{2} + \frac{1}{2}\sum \limits_{n=1}^{N}\sum \limits_{-n}^{n}e^{inx} = \frac{N+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{Nx}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Making appropriate substitutions into eq.(*) we obtain
+
+$$\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx)+\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right)\left(\frac{N}{2} + \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\right)$$
+$$+ \sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\left(\frac{n+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{nx}{2})}{\sin^2(\frac{x}{2})}\right)\,.$$
+
+Now we take the limit of this sum as $N \rightarrow \infty$. We will consider each of the three summands separately. First observe that since $\sum_{n=0}^N\cos(nx)$ is bounded and $\log(N+2)$ is an increasing function it follows that
+
+$$\lim\limits_{N \rightarrow \infty}\frac{1}{\log(N+2)}\sum \limits_{n=0}^N\cos(nx) = 0\,.$$
+
+Next, we consider the limit of the second summand
+
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right)\left(\frac{N}{2} + \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\right) = $$
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{N}{2\log(N+1)} -\frac{N}{2\log(N+2)} \right)+\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right) \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Note that first limit satisfies the following equality
+
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{N}{2\log(N+1)} -\frac{N}{2\log(N+2)} \right) = \lim \limits_{N \rightarrow \infty}\frac{N}{2} \left(\int_{N+1}^{N+2}\frac{-1}{t\log(t)^2}dt\right)\,.$$
+
+Note that since the integral is over an interval of length one, we know that it is less than or equal to one times the maximum value of the function in that interval. Thus, we have
+
+$$\lim \limits_{N \rightarrow \infty}\frac{N}{2} \left(\int_{N+1}^{N+2}\frac{-1}{t\log(t)^2}dt\right)\leq \lim \limits_{N \rightarrow \infty}\frac{N}{2} \left(\frac{-1}{(N+1)\log(N+1)^2}\right) = \lim \limits_{N \rightarrow \infty} \frac{-N}{2(N+1)\log(N+1)^2} \leq$$
+
+$$\lim \limits_{N \rightarrow \infty} \frac{-1}{2\log(N+1)^2} = 0 \,.$$
+
+Consequently, we are left with
+
+$$\lim\limits_{N \rightarrow \infty}\left( \frac{1}{\log(N+1)} -\frac{1}{\log(N+2)} \right) \frac{1}{2}\frac{\sin^2(\frac{(N-1)x}{2})}{\sin^2(\frac{x}{2})}\,.$$
+
+Note that for each fixed value of $x$ $\frac{\sin^2((N-1)x/2)}{\sin^2(x/2)}$ is bounded. Therefore this second limit also goes to zero by the same process as above. Finally, we consider the limit of the last summand
+
+$$\lim\limits_{N \rightarrow \infty}\sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\left(\frac{n+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{nx}{2})}{\sin^2(\frac{x}{2})}\right)\,.$$
+
+By exercise 1.46 we know that
+
+$$\frac{1}{\log(n+4)} +\frac{1}{\log(n+2)} \geq \frac{2}{\log(n+3)}\,.$$
+
+Hence, 
+
+$$\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right) > 0$$
+
+for all $n \in \mathbb{Z}$. From this it follows that all of the terms in the final limit
+
+$$\lim\limits_{N \rightarrow \infty}\sum \limits_{n=0}^{N-2}\left( \frac{1}{\log(n+4)} -\frac{2}{\log(n+3)} +\frac{1}{\log(n+2)} \right)\left(\frac{n+1}{2} + \frac{1}{2}\frac{\sin^2(\frac{nx}{2})}{\sin^2(\frac{x}{2})}\right)\,,$$
+
+must be positive. Therefore $\sum \limits_{n=0}^\infty\frac{\cos(kx)}{\log(k+2)}$ converges to a non-negative function.
+
+\end{proof}
+
+\item \textbf{Exercise 1.22 (Original)}
+
+\item \textbf{Proposition: }For $A = \begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix}$, $e^{At} = \begin{pmatrix}
+e^{{\lambda}t} & 1+te^{{\lambda}t} \\
+0 & {e^{\lambda}t}
+\end{pmatrix}$.
+
+\begin{proof} First we will show by induction on $n$ that $A^n = \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}$. For $n = 2$, it is easy to see that
+
+$$A^2 = \begin{pmatrix}
+\lambda^2 & 2\lambda^{} \\
+0 & \lambda^2
+\end{pmatrix}\,.$$
+
+Assume that this result holds for a given $n$. Then we consider the case for $n+1$. Observe that
+
+$$A^{n+1} = A^nA =  \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}\begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix} = \begin{pmatrix}
+\lambda^{n+1} & (n+1)\lambda^{n} \\
+0 & \lambda^{n+1}
+\end{pmatrix}\,.$$
+
+Thus, we see that the result holds for all $n \in \mathbb{N}$. Now we can examine $e^{At}$. We know that 
+
+$$e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!}\,.$$
+
+Using the above result for $A^n$, this can be rewritten as
+
+$$\sum_{n=0}^{\infty} \frac{(At)^n}{n!} = \begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=0}^{\infty} \frac{n\lambda^{n-1} t^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = 
+\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=0}^{\infty} \frac{\lambda^{n-1} t^n}{(n-1)!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \,.$$
+$$\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & 1+ t\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \begin{pmatrix}
+e^{{\lambda}t} & 1+te^{{\lambda}t} \\
+0 & {e^{\lambda}t}
+\end{pmatrix}\,.$$
+
+\end{proof}
+
+\item \textbf{Rewrite of Exercise 1.22}
+
+\item \textbf{Proposition: }For $A = \begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix}$, $e^{At} = \begin{pmatrix}
+e^{{\lambda}t} & te^{{\lambda}t} \\
+0 & {e^{\lambda}t}
+\end{pmatrix}$.
+
+\begin{proof} First we will show by induction on $n$ that $A^n = \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}$. For $n = 2$, it is easy to see that
+
+$$A^2 = \begin{pmatrix}
+\lambda^2 & 2\lambda^{} \\
+0 & \lambda^2
+\end{pmatrix}\,.$$
+
+Assume that this result holds for a given $n$. Then we consider the case for $n+1$. Observe that
+
+$$A^{n+1} = A^nA =  \begin{pmatrix}
+\lambda^n & n\lambda^{n-1} \\
+0 & \lambda^n
+\end{pmatrix}\begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix} = \begin{pmatrix}
+\lambda^{n+1} & (n+1)\lambda^{n} \\
+0 & \lambda^{n+1}
+\end{pmatrix}\,.$$
+
+Thus, we see that the result holds for all $n \in \mathbb{N}$. Now we can examine $e^{At}$. We know that 
+
+$$e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!}\,.$$
+
+Using the above result for $A^n$, this can be rewritten as
+
+$$\sum_{n=0}^{\infty} \frac{(At)^n}{n!} = \begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=0}^{\infty} \frac{n\lambda^{n-1} t^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = 
+\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} & \sum_{n=1}^{\infty} \frac{\lambda^{n-1} t^n}{(n-1)!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \,.$$
+$$\begin{pmatrix}
+\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} &  t\sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+0 & \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} \\
+\end{pmatrix} = \begin{pmatrix}
+e^{{\lambda}t} & te^{{\lambda}t} \\
+0 & {e^{\lambda t}}
+\end{pmatrix}\,.$$
+
+\end{proof}
+
+\item \textbf{Exercise 1.5 (Original)} 
+
+\textbf{Proposition.} Cauchy sequences of complex numbers converge if and only if, whenever a series $\sum |a_n|$ converges, then $\sum a_n$ converges as well.
+
+\begin{proof} First we assume the convergence of Cauchy sequences. We will show that this implies that absolutely convergent series conditionally converge as well. Let ${a_n}$ be a sequence of complex numbers such that $\sum_{n=1}^\infty |a_n|$ converges. This implies that the sequence of partial sums of $\sum_{n=1}^\infty |a_n|$ (we denote the $N^th$ partial sum as $|A|_N$) converges and therefore must be a Cauchy sequence. In particular, this implies that given $\epsilon > 0$, there exists some $N$ such that for $K,M \geq N$ (without lose of generality we can assume that $K > M$) 
+
+	$$||A|_K - |A|_M| < \epsilon\,.$$
+	
+	Observe that 
+	$$\epsilon > ||A|_K - |A|_M| = |A|_K - |A|_M = \sum_{M+1}^K |a_n| \geq |\sum_{M+1}^K a_n| = |A_K +A_M|\,,$$
+	
+	where $A_M$ is the $M^{th}$ partial sum of $\sum_{n=1}^\infty a_n$. Thus, we see that ${A_N}$ is a Cauchy sequence as well and therefore it converges. 
+
+Next assume that if a series converges absolutely then, it converges conditionally. We will show that this implies the convergence of Cauchy sequences. Let ${a_n}$ be a Cauchy sequence of complex numbers. Since ${a_n}$ is Cauchy there exists some $N_1$ such that for $n > N_1$
+
+$$|a_n - a_{N_1}| < \frac{1}{2}\,.$$
+
+Similarly, there exists some $N_2$ such that for $n > N_2$
+
+$$|a_n - a_{N_2}| < \frac{1}{2^2}\,.$$
+
+Proceeding inductively we see that in general We can find a $N_k$ such that for $n > N_k$
+
+$$|a_n - a_{N_k}| < \frac{1}{2^k}\,.$$
+
+Note that we have created an increasing sequence of indices $N_1 < N_2 < ... < N_k$. Thus we can replace some terms in the above inequalities as follows
+
+	$$|a_n - a_{N_k}| < \frac{1}{2^k}$$
+	$$|a_{N_k} - a_{N_{k-1}}| < \frac{1}{2^{k-1}}$$
+	$$\m$$
+	$$\m$$
+	$$\m$$
+	$$|a_{N_2} - a_{N_{1}}| < \frac{1}{2}\,,$$
+	
+	where $n > N_k$. Setting $n = N_{K+1}$ and  combining these inequalities into sums we obtain
+	
+	$$\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}| < \sum_{k=1}^K \frac{1}{2^k}\,.$$
+	
+	Observe that the right-hand side of this inequality is a geometric series that converges as $K \rightarrow \infty$. Therefore the left-hand side must also be a convergent series. By our hypothesis, since $\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}|$ is convergent, it follows that $\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}}$ is convergent as well.  Observe that this series is telescopic and therefore
+	
+	$$\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}} = a_{N_{k+1}} = a_n$$
+	
+	for $n > N_{k}$. Hence, the Cauchy sequence ${a_n}$ is convergent.
+
+\end{proof}
+
+\item \textbf{Rewrite of Exercise 1.5} 
+
+\textbf{Proposition.} Cauchy sequences of complex numbers converge if and only if, whenever a series $\sum |a_n|$ converges, then $\sum a_n$ converges as well.
+
+\begin{proof} First we assume the convergence of Cauchy sequences. We will show that this implies that absolutely convergent series conditionally converge as well. Let $\lbrace a_n \rbrace$ be a sequence of complex numbers such that $\sum_{n=1}^\infty |a_n|$ converges. This implies that the sequence of partial sums of $\sum_{n=1}^\infty |a_n|$ (we denote the $N^th$ partial sum as $|A|_N$) converges and therefore must be a Cauchy sequence. In particular, this implies that given $\epsilon > 0$, there exists some $N$ such that for $K,M \geq N$ (without lose of generality we can assume that $K > M$) 
+
+	$$||A|_K - |A|_M| < \epsilon\,.$$
+	
+	Observe that 
+	$$\epsilon > ||A|_K - |A|_M| = |A|_K - |A|_M = \sum_{M+1}^K |a_n| \geq |\sum_{M+1}^K a_n| = |A_K +A_M|\,,$$
+	
+	where $A_M$ is the $M^{th}$ partial sum of $\sum_{n=1}^\infty a_n$. Thus, we see that ${A_N}$ is a Cauchy sequence as well and therefore it converges. 
+
+Next assume that if a series converges absolutely then, it converges conditionally. We will show that this implies the convergence of Cauchy sequences. Let ${a_n}$ be a Cauchy sequence of complex numbers. Since ${a_n}$ is Cauchy there exists some $N_1$ such that for $n > N_1$
+
+$$|a_n - a_{N_1}| < \frac{1}{2}\,.$$
+
+Similarly, there exists some $N_2$ such that for $n > N_2$
+
+$$|a_n - a_{N_2}| < \frac{1}{2^2}\,.$$
+
+Proceeding inductively we see that in general We can find a $N_k$ such that for $n > N_k$
+
+$$|a_n - a_{N_k}| < \frac{1}{2^k}\,.$$
+
+Note that we have created an increasing sequence of indices $N_1 < N_2 < ... < N_k$. Thus we can replace some terms in the above inequalities as follows
+
+	$$|a_n - a_{N_k}| < \frac{1}{2^k}$$
+	$$|a_{N_k} - a_{N_{k-1}}| < \frac{1}{2^{k-1}}$$
+	$$\m$$
+	$$\m$$
+	$$\m$$
+	$$|a_{N_2} - a_{N_{1}}| < \frac{1}{2}\,,$$
+	
+	where $n > N_k$. Setting $n = N_{K+1}$ and  combining these inequalities into sums we obtain
+	
+	$$\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}| < \sum_{k=1}^K \frac{1}{2^k}\,.$$
+	
+	Observe that the right-hand side of this inequality is a geometric series that converges as $K \rightarrow \infty$. Therefore the left-hand side must also be a convergent series. By our hypothesis, since $\sum_{k=1}^K |a_{N_{k+1}} - a_{N_{k}}|$ is convergent, it follows that $\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}}$ is convergent as well.  Observe that this series is telescopic and therefore
+	
+	$$\sum_{k=1}^K a_{N_{k+1}} - a_{N_{k}} = a_{N_{k+1}} = a_n$$
+	
+	for $n > N_{k}$. Hence, the Cauchy sequence ${a_n}$ is convergent.
+
+\end{proof}
+
+\end{description}
+
+\end{document} 
